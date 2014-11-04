@@ -14,6 +14,7 @@
 		B5B658F11A097B5F0004F9EE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B658F01A097B5F0004F9EE /* Images.xcassets */; };
 		B5B658F41A097B5F0004F9EE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5B658F21A097B5F0004F9EE /* LaunchScreen.xib */; };
 		B5B659001A097B5F0004F9EE /* WheresTheWaterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B658FF1A097B5F0004F9EE /* WheresTheWaterTests.swift */; };
+		B5B6590B1A097C780004F9EE /* WheresTheWater.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5B659091A097C780004F9EE /* WheresTheWater.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		B5B658F91A097B5F0004F9EE /* WheresTheWaterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WheresTheWaterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5B658FE1A097B5F0004F9EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5B658FF1A097B5F0004F9EE /* WheresTheWaterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheresTheWaterTests.swift; sourceTree = "<group>"; };
+		B5B6590A1A097C780004F9EE /* WheresTheWater.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WheresTheWater.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				B5B658F01A097B5F0004F9EE /* Images.xcassets */,
 				B5B658F21A097B5F0004F9EE /* LaunchScreen.xib */,
 				B5B658E51A097B5F0004F9EE /* Supporting Files */,
+				B5B659091A097C780004F9EE /* WheresTheWater.xcdatamodeld */,
 			);
 			path = WheresTheWater;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5B658EC1A097B5F0004F9EE /* SecondViewController.swift in Sources */,
+				B5B6590B1A097C780004F9EE /* WheresTheWater.xcdatamodeld in Sources */,
 				B5B658E81A097B5F0004F9EE /* AppDelegate.swift in Sources */,
 				B5B658EA1A097B5F0004F9EE /* FirstViewController.swift in Sources */,
 			);
@@ -419,6 +423,19 @@
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B5B659091A097C780004F9EE /* WheresTheWater.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B5B6590A1A097C780004F9EE /* WheresTheWater.xcdatamodel */,
+			);
+			currentVersion = B5B6590A1A097C780004F9EE /* WheresTheWater.xcdatamodel */;
+			path = WheresTheWater.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B5B658DA1A097B5F0004F9EE /* Project object */;
 }
