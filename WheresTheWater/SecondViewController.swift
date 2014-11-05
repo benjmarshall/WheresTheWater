@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class SecondViewController: UIViewController, UITableViewDataSource {
+class SecondViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // Our Table View
     @IBOutlet var tableView: UITableView!
@@ -39,6 +39,21 @@ class SecondViewController: UIViewController, UITableViewDataSource {
         return cell
     }
     
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        performSegueWithIdentifier("RiverDetailSegue", sender: indexPath.row)
+        println("didselectrow")
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "RiverDetailSegue" {
+            var destViewController = segue.destinationViewController as RiverDetailViewController
+            var indexPath = sender as Int
+            destViewController.river = self.rivers[indexPath]
+            println("didpreparesegue")
+        }
+    }
+
+   
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
