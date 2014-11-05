@@ -7,12 +7,57 @@
 //
 
 import UIKit
+import CoreData
 
-class SecondViewController: UIViewController {
+class SecondViewController: UIViewController, UITableViewDataSource {
+    
+    // Our Table View
+    @IBOutlet var tableView: UITableView!
+
+    // Our local copy of the Rivers database to be grabbed from CoreData
+    var rivers = [NSManagedObject]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // Set Table Data Source
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
+    }    
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // How many rivers?
+        return rivers.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        // Queue rivers into cells
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
+        let river = rivers[indexPath.row]
+        // Cell text to be river name
+        cell.textLabel.text = river.valueForKey("name") as String?
+        return cell
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Get App Delegate
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        
+        // Set up Core Data Fetch Request
+        let fetchRequest = NSFetchRequest(entityName: "River")
+        
+        // Fetch Core Data
+        var error: NSError?
+        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as [NSManagedObject]?
+        if let results = fetchedResults {
+            rivers = results
+        } else {
+            //Debug Output
+            println("Error: failed to fetch Rivers Core Data")
+        }
     }
 
     override func didReceiveMemoryWarning() {
