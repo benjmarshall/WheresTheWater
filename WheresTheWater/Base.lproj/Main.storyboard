@@ -48,28 +48,33 @@
             <point key="canvasLocation" x="750" y="-320.25"/>
         </scene>
         <!--Rivers-->
-        <scene sceneID="wg7-f3-ORb">
+        <scene sceneID="fkZ-OW-Fwi">
             <objects>
-                <viewController id="8rJ-Kc-sve" customClass="SecondViewController" customModule="WheresTheWater" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="uQj-s4-Ie9">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <tableViewController id="uh0-9e-1Xz" customClass="RiverTableViewController" customModule="WheresTheWater" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="jM7-JH-7xe">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <sections/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="ehx-w9-jNE">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ehx-w9-jNE" id="mHR-Fi-xDm">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="cTq-fP-5G8" kind="show" identifier="RiverDetailSegue" id="kIv-lt-a5p"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="8rJ-Kc-sve" id="xF3-eZ-yqc"/>
-                            <outlet property="delegate" destination="8rJ-Kc-sve" id="oDP-8q-YX9"/>
+                            <outlet property="dataSource" destination="uh0-9e-1Xz" id="aJ5-uY-EYh"/>
+                            <outlet property="delegate" destination="uh0-9e-1Xz" id="f4o-h2-52U"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Rivers" id="9lR-eC-XuH"/>
-                    <connections>
-                        <outlet property="tableView" destination="uQj-s4-Ie9" id="BGi-vb-cSS"/>
-                        <segue destination="cTq-fP-5G8" kind="show" identifier="RiverDetailSegue" id="AhT-JW-xBJ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
+                    <navigationItem key="navigationItem" title="Rivers" id="wDH-jI-4UZ"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ghE-cQ-1zN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1668" y="360"/>
+            <point key="canvasLocation" x="1746" y="360"/>
         </scene>
         <!--River Detail View Controller-->
         <scene sceneID="XSD-7l-KVG">
@@ -80,6 +85,7 @@
                         <viewControllerLayoutGuide type="bottom" id="fGm-3G-4ua"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hkf-xN-BLP">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I'm here!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l3w-9G-hvI">
@@ -111,7 +117,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bg7-hN-Y1g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2493" y="360"/>
+            <point key="canvasLocation" x="2649" y="360"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -144,7 +150,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="rootViewController" id="tZ6-sR-PJg"/>
+                        <segue destination="uh0-9e-1Xz" kind="relationship" relationship="rootViewController" id="iO5-n5-5TL"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="moZ-aH-omt" userLabel="First Responder" sceneMemberID="firstResponder"/>
