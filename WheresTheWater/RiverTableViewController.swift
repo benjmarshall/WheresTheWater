@@ -36,10 +36,19 @@ class RiverTableViewController: UITableViewController {
 
 
         // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+         self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    // Added to fix bug which keeps cell selected when swiping back from detail view
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        let tableSelection = self.tableView.indexPathForSelectedRow()
+        if tableSelection != nil {
+            self.tableView.deselectRowAtIndexPath(tableSelection!, animated: animated)
+        }
     }
 
     override func didReceiveMemoryWarning() {
