@@ -8,6 +8,9 @@
 
 import UIKit
 import CoreData
+import Alamofire
+import SwiftyJSON
+import AlamofireSwiftyJSON
 
 class FirstViewController: UIViewController {
     
@@ -57,6 +60,13 @@ class FirstViewController: UIViewController {
                 }
                 rivers.append(river)
             }
+        }
+        
+        // Test fetching JSON data from rainchasers!
+        Alamofire.request(.GET, "http://api.rainchasers.com/v1/river")
+            .responseSwiftyJSON { (request, response, json, error) in
+                println(json)
+                println(error)
         }
     }
 
