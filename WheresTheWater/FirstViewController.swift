@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Ben Marshall. All rights reserved.
 //
 
+
 import UIKit
 import CoreData
 import Alamofire
@@ -62,12 +63,10 @@ class FirstViewController: UIViewController {
             }
         }
         
+        
         // Test fetching JSON data from rainchasers!
-        Alamofire.request(.GET, "http://api.rainchasers.com/v1/river")
-            .responseSwiftyJSON { (request, response, json, error) in
-                println(json)
-                println(error)
-        }
+        RainchasersAPI.fetchFullRiverData()
+    
     }
 
     override func didReceiveMemoryWarning() {
