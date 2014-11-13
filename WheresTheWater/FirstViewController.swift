@@ -21,6 +21,8 @@ class FirstViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        
+        /*
         // Dummy routine to set up some river data for test!
         
         // Create array of rivers
@@ -51,7 +53,7 @@ class FirstViewController: UIViewController {
             
                 // Create a new river object
                 let river = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
-                river.setValue(new_river, forKey: "name")
+                river.setValue(new_river, forKey: "river")
                 
                 // And save the new river to the Rivers Core Data
                 var error: NSError?
@@ -63,9 +65,10 @@ class FirstViewController: UIViewController {
             }
         }
         
+        */
         
         // Test fetching JSON data from rainchasers!
-        RainchasersAPI.fetchFullRiverData()
+        RainchasersAPI.downloadFullRiverData()
     
     }
 

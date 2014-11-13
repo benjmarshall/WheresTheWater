@@ -19,7 +19,7 @@ class RiverDetailViewController: UIViewController {
         super.viewDidLoad()
 
         // Add River Details
-        riverNameLabel.text = river.valueForKey("name") as String?
+        riverNameLabel.text = river.valueForKey("river") as String?
         
     }
 

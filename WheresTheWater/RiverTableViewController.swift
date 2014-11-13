@@ -74,7 +74,7 @@ class RiverTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         let river = rivers[indexPath.row]
         // Cell text to be river name
-        cell.textLabel.text = river.valueForKey("name") as String?
+        cell.textLabel.text = river.valueForKey("river") as String?
 
         return cell
     }
