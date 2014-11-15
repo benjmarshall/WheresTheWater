@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Ben Marshall. All rights reserved.
 //
 
-
 import UIKit
 import CoreData
 import Alamofire
@@ -68,6 +67,9 @@ class FirstViewController: UIViewController {
         */
         
         // Test fetching JSON data from rainchasers!
+        
+        // TODO: Add funtionality to check timestamps before updating!
+        
         //RainchasersAPI.deleteAllRivers()
         //RainchasersAPI.downloadFullRiverData()
         
