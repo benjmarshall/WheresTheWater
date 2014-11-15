@@ -68,7 +68,36 @@ class FirstViewController: UIViewController {
         */
         
         // Test fetching JSON data from rainchasers!
-        RainchasersAPI.downloadFullRiverData()
+        //RainchasersAPI.deleteAllRivers()
+        //RainchasersAPI.downloadFullRiverData()
+        
+        
+        // Get App Delegate
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        
+        // Set up Core Data Fetch Request
+        let fetchRequest = NSFetchRequest(entityName: "DB_stats")
+        
+        // Fetch Core Data
+        var error: NSError?
+        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as [NSManagedObject]?
+        var db_stats = [NSManagedObject]()
+        
+        if let results = fetchedResults {
+            db_stats = results
+            let updateLink = db_stats[0].valueForKey("resume_link") as String
+            //Debug Output
+            println(updateLink)
+            // Do Update
+            RainchasersAPI.downloadUpdateRiverData(updateLink)
+        } else {
+            //Debug Output
+            println("Failed to fetch database")
+        }
+
+        
+        
     
     }
 
