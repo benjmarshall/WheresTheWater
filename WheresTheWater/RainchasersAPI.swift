@@ -69,7 +69,29 @@ class RainchasersAPI: NSObject {
                         
                         // Create a new river object
                         let river = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+                        river.setValue(subJSON["uuid"].string, forKey: "uuid")
+                        river.setValue(subJSON["url"].string, forKey: "url")
                         river.setValue(subJSON["river"].string, forKey: "river")
+                        river.setValue(subJSON["section"].string, forKey: "section")
+                        river.setValue(subJSON["desc"].string, forKey: "desc")
+                        river.setValue(subJSON["directions"].string, forKey: "directions")
+                        river.setValue(subJSON["grade"]["max"].string, forKey: "grade_max")
+                        river.setValue(subJSON["grade"]["text"].string, forKey: "grade_text")
+                        river.setValue(subJSON["grade"]["value"].string, forKey: "grade_value")
+                        river.setValue(subJSON["km"].string, forKey: "km")
+                        if subJSON["position"][0] != nil {
+                            for (key2: String, subJSON2: JSON) in subJSON["position"] {
+                                if subJSON2["type"].string == "putin" {
+                                    river.setValue(subJSON2["lat"].string, forKey: "putin_lat")
+                                    river.setValue(subJSON2["lng"].string, forKey: "putin_lng")
+                                }
+                                else {
+                                    river.setValue(subJSON2["lat"].string, forKey: "takeout_lat")
+                                    river.setValue(subJSON2["lng"].string, forKey: "takeout_lng")
+                                }
+                            }
+                        }
+                        
                         
                         // And save the new river to the Rivers Core Data
                         var error: NSError?

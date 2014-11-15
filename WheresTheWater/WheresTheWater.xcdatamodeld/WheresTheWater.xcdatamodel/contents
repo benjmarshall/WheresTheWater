@@ -3,7 +3,7 @@
     <entity name="River" syncable="YES">
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="directions" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="grade_max" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="grade_max" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="grade_text" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="grade_value" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="km" optional="YES" attributeType="String" syncable="YES"/>
@@ -14,6 +14,7 @@
         <attribute name="state_source_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="state_source_type" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="state_source_value" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="state_text" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="state_time" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="state_value" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="takeout_lat" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -22,6 +23,6 @@
         <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="River" positionX="-63" positionY="-18" width="128" height="328"/>
+        <element name="River" positionX="-63" positionY="-18" width="128" height="345"/>
     </elements>
 </model>

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Home-->
@@ -21,9 +22,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="91" y="236" width="219" height="17"/>
-                                </variation>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" text="Where's The Water" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="KQZ-1w-vlD">
                                 <rect key="frame" x="221" y="279" width="158" height="42"/>
@@ -32,7 +30,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="63" y="178" width="274" height="42"/>
+                                    <rect key="frame" x="16" y="178" width="368" height="29"/>
                                 </variation>
                             </label>
                         </subviews>
@@ -108,40 +106,124 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="River Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l3w-9G-hvI">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="River Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l3w-9G-hvI">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSV-qR-bCc">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grade ?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A25-t0-ane">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How High?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="acP-ij-odQ">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="297" y="151" width="87" height="21"/>
+                                </variation>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1t0-UM-caZ">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="129" id="d8K-vD-OyD"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="d8K-vD-OyD"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="d8K-vD-OyD"/>
+                                    </mask>
+                                </variation>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="l3w-9G-hvI" firstAttribute="top" secondItem="aB3-Uh-A84" secondAttribute="bottom" constant="96" id="heX-RH-ga4"/>
-                            <constraint firstAttribute="centerX" secondItem="l3w-9G-hvI" secondAttribute="centerX" id="qol-Xa-ogw"/>
+                            <constraint firstItem="acP-ij-odQ" firstAttribute="trailing" secondItem="hkf-xN-BLP" secondAttribute="trailingMargin" id="2bV-Y5-f9T"/>
+                            <constraint firstItem="l3w-9G-hvI" firstAttribute="top" secondItem="aB3-Uh-A84" secondAttribute="bottom" constant="30" id="5GE-DR-erc"/>
+                            <constraint firstItem="A25-t0-ane" firstAttribute="leading" secondItem="hkf-xN-BLP" secondAttribute="leadingMargin" id="6XC-l8-ZrU"/>
+                            <constraint firstItem="l3w-9G-hvI" firstAttribute="leading" secondItem="hkf-xN-BLP" secondAttribute="leadingMargin" id="BIj-SV-0vZ"/>
+                            <constraint firstItem="A25-t0-ane" firstAttribute="top" secondItem="acP-ij-odQ" secondAttribute="top" id="EZ7-Ra-g3O"/>
+                            <constraint firstItem="1t0-UM-caZ" firstAttribute="trailing" secondItem="hkf-xN-BLP" secondAttribute="trailingMargin" id="j9U-te-aoT"/>
+                            <constraint firstItem="kSV-qR-bCc" firstAttribute="leading" secondItem="hkf-xN-BLP" secondAttribute="leadingMargin" id="k5m-US-Hkr"/>
+                            <constraint firstItem="A25-t0-ane" firstAttribute="top" secondItem="kSV-qR-bCc" secondAttribute="bottom" constant="8" id="mqy-ku-ZX0"/>
+                            <constraint firstItem="1t0-UM-caZ" firstAttribute="leading" secondItem="hkf-xN-BLP" secondAttribute="leadingMargin" constant="-6" id="py7-mC-jA9"/>
+                            <constraint firstItem="kSV-qR-bCc" firstAttribute="top" secondItem="l3w-9G-hvI" secondAttribute="bottom" constant="8" id="u3Z-4r-LVy"/>
+                            <constraint firstItem="1t0-UM-caZ" firstAttribute="leading" secondItem="hkf-xN-BLP" secondAttribute="leadingMargin" constant="-6" id="uWw-jD-hWE"/>
+                            <constraint firstItem="1t0-UM-caZ" firstAttribute="top" secondItem="acP-ij-odQ" secondAttribute="bottom" constant="8" id="w7B-LT-mYM"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="l3w-9G-hvI"/>
+                                <exclude reference="kSV-qR-bCc"/>
+                                <exclude reference="A25-t0-ane"/>
+                                <exclude reference="acP-ij-odQ"/>
+                                <exclude reference="1t0-UM-caZ"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="heX-RH-ga4"/>
-                                <exclude reference="qol-Xa-ogw"/>
+                                <exclude reference="5GE-DR-erc"/>
+                                <exclude reference="BIj-SV-0vZ"/>
+                                <exclude reference="k5m-US-Hkr"/>
+                                <exclude reference="u3Z-4r-LVy"/>
+                                <exclude reference="6XC-l8-ZrU"/>
+                                <exclude reference="EZ7-Ra-g3O"/>
+                                <exclude reference="mqy-ku-ZX0"/>
+                                <exclude reference="j9U-te-aoT"/>
+                                <exclude reference="py7-mC-jA9"/>
+                                <exclude reference="uWw-jD-hWE"/>
+                                <exclude reference="w7B-LT-mYM"/>
+                                <exclude reference="2bV-Y5-f9T"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="l3w-9G-hvI"/>
+                                <include reference="kSV-qR-bCc"/>
+                                <include reference="A25-t0-ane"/>
+                                <include reference="acP-ij-odQ"/>
+                                <include reference="1t0-UM-caZ"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="heX-RH-ga4"/>
-                                <include reference="qol-Xa-ogw"/>
+                                <include reference="5GE-DR-erc"/>
+                                <include reference="BIj-SV-0vZ"/>
+                                <include reference="k5m-US-Hkr"/>
+                                <include reference="u3Z-4r-LVy"/>
+                                <include reference="6XC-l8-ZrU"/>
+                                <include reference="EZ7-Ra-g3O"/>
+                                <include reference="mqy-ku-ZX0"/>
+                                <include reference="j9U-te-aoT"/>
+                                <include reference="py7-mC-jA9"/>
+                                <include reference="uWw-jD-hWE"/>
+                                <include reference="w7B-LT-mYM"/>
+                                <include reference="2bV-Y5-f9T"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="N1F-58-i5l"/>
                     <connections>
+                        <outlet property="riverDescriptionTextView" destination="1t0-UM-caZ" id="IIy-8U-3hJ"/>
+                        <outlet property="riverGradeLabel" destination="A25-t0-ane" id="0ys-AC-Nie"/>
+                        <outlet property="riverLevelLabel" destination="acP-ij-odQ" id="G1k-QD-chM"/>
                         <outlet property="riverNameLabel" destination="l3w-9G-hvI" id="BSf-66-fKZ"/>
+                        <outlet property="riverSectionLabel" destination="kSV-qR-bCc" id="uLP-6X-Ng0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bg7-hN-Y1g" userLabel="First Responder" sceneMemberID="firstResponder"/>
