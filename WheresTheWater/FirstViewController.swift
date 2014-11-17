@@ -88,19 +88,61 @@ class FirstViewController: UIViewController {
         
         if let results = fetchedResults {
             db_stats = results
-            let updateLink = db_stats[0].valueForKey("resume_link") as String
-            //Debug Output
-            println(updateLink)
-            // Do Update
-            RainchasersAPI.downloadUpdateRiverData(updateLink)
+            
+            // Check any DB stats are stored
+            if db_stats.isEmpty {
+                // Do a full update
+                //Debug Output
+                println("No data found")
+                println("Full Download Started")
+                RainchasersAPI.deleteAllRivers()
+                RainchasersAPI.downloadFullRiverData()
+            } else {
+                // Fetch latest full update time
+                let fullUpdateTime = db_stats[0].valueForKey("full_update_time") as NSDate
+                // Create comparison times (1 week)
+                let compareFullTime = NSDate(timeInterval: -604800, sinceDate: NSDate())
+                let compareFullResult = fullUpdateTime.compare(compareFullTime)
+                
+                // First check to see if last full update was over 1 week ago
+                if compareFullResult == NSComparisonResult.OrderedAscending {
+                    // Do a full update
+                    //Debug Output
+                    println("Full Download Started")
+                    RainchasersAPI.deleteAllRivers()
+                    RainchasersAPI.downloadFullRiverData()
+                }
+                else {
+                    // Check if we have ever done a refresh
+                    if let updateTime = db_stats[0].valueForKey("update_time") as NSDate? {
+                        // Create comparison times (15 mins)
+                        let comapreTime = NSDate(timeInterval: -900, sinceDate: NSDate())
+                        let compareResult = updateTime.compare(comapreTime)
+                        
+                        // Check to see if last update was more than 15 mins ago
+                        if compareResult == NSComparisonResult.OrderedAscending {
+                            // Do refresh
+                            let updateLink = db_stats[0].valueForKey("resume_link") as String
+                            //Debug Output
+                            println("Refresh Started")
+                            // Do Update
+                            RainchasersAPI.downloadUpdateRiverData(updateLink)
+                        }
+                    } else {
+                        // No prevous refresh so best do one now!
+                        //Debug Output
+                        println("No previous refresh")
+                        println("Refresh Started")
+                        // Do Update
+                        let updateLink = db_stats[0].valueForKey("resume_link") as String
+                        RainchasersAPI.downloadUpdateRiverData(updateLink)
+                    }
+                }
+            }
         } else {
             //Debug Output
             println("Failed to fetch database")
         }
-
-        
-        
-    
     }
 
     override func didReceiveMemoryWarning() {
