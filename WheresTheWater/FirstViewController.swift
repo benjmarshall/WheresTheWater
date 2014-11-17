@@ -85,6 +85,7 @@ class FirstViewController: UIViewController {
                     }
                 }
             }
+            
         } else {
             //Debug Output
             println("Failed to fetch database")

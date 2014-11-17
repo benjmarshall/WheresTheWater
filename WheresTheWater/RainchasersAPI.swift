@@ -65,7 +65,7 @@ class RainchasersAPI: NSObject {
     class func downloadFullRiverData(in_link:String = "http://api.rainchasers.com/v1/river") {
         
         // Debug
-        println(in_link)
+        println("Fetching All Rivers")
         
         // Do the request
         Alamofire.request(.GET, in_link)
@@ -80,7 +80,7 @@ class RainchasersAPI: NSObject {
                 // If we get a valid repsonse the process the received data
                 let status = json["status"]
                 // Debug
-                println(status)
+                //println(status)
                 if status == 200 {
                     let data = json["data"]
  
@@ -140,6 +140,8 @@ class RainchasersAPI: NSObject {
                 if let out_link = json["meta"]["link"]["next"].string {
                     RainchasersAPI.downloadFullRiverData(in_link: out_link)
                 } else {
+                    
+                    // Create refresh link
                     let update_link = json["meta"]["link"]["resume"].string
                     
                     // Set up Core Data Fetch Request
@@ -186,11 +188,16 @@ class RainchasersAPI: NSObject {
                         println("Failed to fetch database")
                     }
                     
+                    // Debug
+                    println("Fetch Complete")
+                    
+                    // Fetch river states
+                    //RainchasersAPI.updateRiverStates()
+                    
                 }
                 
                 
         }
-        
         
     }
     
@@ -355,12 +362,80 @@ class RainchasersAPI: NSObject {
                         println("Failed to fetch database")
                     }
                     
+                    // Fetch river states
+                    //RainchasersAPI.updateRiverStates()
+                    
                 }
                 
                 
         }
         
         
+    }
+    
+    class func updateRiverStates() {
+    
+        // Once we have all the river data downloaded then fetch all the states
+        
+        // Debug Output
+        println("Fetching States")
+        
+        // Get App Delegate
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        
+        // Set up Core Data Fetch Request
+        let fetchRequest = NSFetchRequest(entityName: "River")
+        
+        // Fetch Core Data
+        var error: NSError?
+        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as [NSManagedObject]?
+        var rivers = [NSManagedObject]()
+        rivers = fetchedResults!
+        
+        for river in rivers {
+            
+            // Debug Output
+            let name = river.valueForKey("river") as String
+            //println("Fetching state for \(name)")
+                
+            // Pull uuid and create the url
+            let uuid = river.valueForKey("uuid") as String
+            let url = NSURL(string: "http://api.rainchasers.com/v1/river/\(uuid)")
+            //println(url)
+            
+            // Do the request
+            var request = NSURLRequest(URL: url!)
+            var requestReturn = NSURLConnection.sendSynchronousRequest(request, returningResponse: nil, error: nil)
+            if requestReturn != nil {
+                // Response handler
+                var json = NSJSONSerialization.JSONObjectWithData(requestReturn!, options: nil, error: nil) as NSDictionary
+                var data = JSON(json)
+                // Set all the state fields
+                // Debug Output
+                //println(data)
+                //println(data["status"])
+                //println(data["data"]["state"]["text"].stringValue)
+                river.setValue(data["data"]["state"]["value"].floatValue, forKey: "state_value")
+                river.setValue(data["data"]["state"]["time"].string, forKey: "state_time")
+                river.setValue(data["data"]["state"]["text"].string, forKey: "state_text")
+                river.setValue(data["data"]["state"]["source"]["type"].string, forKey: "state_source_type")
+                river.setValue(data["data"]["state"]["source"]["name"].string, forKey: "state_source_name")
+                river.setValue(data["data"]["state"]["source"]["value"].floatValue, forKey: "state_source_value")
+                //println(river.valueForKey("state_text"))
+            }
+            
+        }
+        
+        // Debug Output
+        println ("Finished fetching states")
+        
+        // And save to Core Data
+        if !managedContext.save(&error) {
+            // Debug Output
+            println("Could not save to Core Data")
+        }
+
     }
 
    

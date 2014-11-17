@@ -23,6 +23,8 @@ class RiverTableViewController: UITableViewController {
         
         // Set up Core Data Fetch Request
         let fetchRequest = NSFetchRequest(entityName: "River")
+        //let fetchPredicate = NSPredicate(format: "river contains %s", "Dee")
+        //fetchRequest.predicate = fetchPredicate
         
         // Fetch Core Data
         var error: NSError?
@@ -75,6 +77,11 @@ class RiverTableViewController: UITableViewController {
         let river = rivers[indexPath.row]
         // Cell text to be river name
         cell.textLabel.text = river.valueForKey("river") as String?
+        var stateText = river.valueForKey("state_text") as String?
+        if stateText == nil {
+            stateText = "No Level Data"
+        }
+        cell.detailTextLabel?.text = stateText
 
         return cell
     }
