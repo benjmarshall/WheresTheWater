@@ -9,10 +9,12 @@
 import UIKit
 import CoreData
 
-class RiverTableViewController: UITableViewController {
+class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
     
     // Our local copy of the Rivers database to be grabbed from CoreData
     var rivers = [NSManagedObject]()
+    // An array for filtered rivers
+    var filteredRivers = [NSManagedObject]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,15 +70,31 @@ class RiverTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
         // How many rivers?
-        return rivers.count
+        if tableView == self.searchDisplayController!.searchResultsTableView {
+            // Filtered List
+            return filteredRivers.count
+        } else {
+            // Full List
+            return rivers.count
+        }
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
-        let river = rivers[indexPath.row]
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+        
+        var river: NSManagedObject
+        
+        // Check to to see if we are filtering
+        if tableView == self.searchDisplayController!.searchResultsTableView {
+            river = filteredRivers[indexPath.row]
+        } else {
+           river = rivers[indexPath.row]
+        }
+        
         // Cell text to be river name
         cell.textLabel.text = river.valueForKey("river") as String?
+        // Subtext to be grade
         var stateText = river.valueForKey("state_text") as String?
         if stateText == nil {
             stateText = "No Level Data"
@@ -84,6 +102,31 @@ class RiverTableViewController: UITableViewController {
         cell.detailTextLabel?.text = stateText
 
         return cell
+    }
+    
+    func filterContentForSearchText(searchText: String) {
+        // Filter the array using the filter method
+        self.filteredRivers = self.rivers.filter({( river: NSManagedObject) -> Bool in
+            //let categoryMatch = (scope == "All") || (river.valueForKey("river") == scope)
+            let stringMatch = (river.valueForKey("river") as String).rangeOfString(searchText)
+            //return categoryMatch && (stringMatch != nil)
+            return stringMatch != nil
+        })
+    }
+    
+    func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
+        self.filterContentForSearchText(searchString)
+        return true
+    }
+    
+    /*func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
+        self.filterContentForSearchText(self.searchDisplayController!.searchBar.text)
+        return true
+    }*/
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        // Remove filtered list when exiting the search view to fix crash in segue
+        filteredRivers = []
     }
     
 
@@ -126,14 +169,20 @@ class RiverTableViewController: UITableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
         if segue.identifier == "RiverDetailSegue" {
             var destViewController = segue.destinationViewController as RiverDetailViewController
             var sourceViewController = segue.sourceViewController as RiverTableViewController
-            var indexPath = sourceViewController.tableView.indexPathForSelectedRow()!.row
-            destViewController.river = self.rivers[indexPath]
+            var indexPath: Int
+            if self.filteredRivers.count > 0 {
+                indexPath = self.searchDisplayController!.searchResultsTableView.indexPathForSelectedRow()!.row
+                destViewController.river = self.filteredRivers[indexPath]
+            } else {
+                indexPath = sourceViewController.tableView.indexPathForSelectedRow()!.row
+                destViewController.river = self.rivers[indexPath]
+            }
         }
     }
 
