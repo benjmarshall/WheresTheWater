@@ -14,6 +14,7 @@
 		B533EB9E1A0ABFBA00C7FFD2 /* RiverDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B533EB9D1A0ABFBA00C7FFD2 /* RiverDetailViewController.swift */; };
 		B534031B1A13F236007D848B /* RainchasersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534031A1A13F236007D848B /* RainchasersAPI.swift */; };
 		B5B38C901A1F8EF40060FD9C /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5B38C8F1A1F8EF40060FD9C /* Entitlements.plist */; };
+		B5B38C921A1FA1650060FD9C /* RiverUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B38C911A1FA1650060FD9C /* RiverUITableViewCell.swift */; };
 		B5B658E81A097B5F0004F9EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B658E71A097B5F0004F9EE /* AppDelegate.swift */; };
 		B5B658EA1A097B5F0004F9EE /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B658E91A097B5F0004F9EE /* FirstViewController.swift */; };
 		B5B658EF1A097B5F0004F9EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5B658ED1A097B5F0004F9EE /* Main.storyboard */; };
@@ -134,6 +135,7 @@
 		B533EB9D1A0ABFBA00C7FFD2 /* RiverDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RiverDetailViewController.swift; sourceTree = "<group>"; };
 		B534031A1A13F236007D848B /* RainchasersAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RainchasersAPI.swift; sourceTree = "<group>"; };
 		B5B38C8F1A1F8EF40060FD9C /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		B5B38C911A1FA1650060FD9C /* RiverUITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RiverUITableViewCell.swift; sourceTree = "<group>"; };
 		B5B658E21A097B5F0004F9EE /* WheresTheWater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WheresTheWater.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5B658E61A097B5F0004F9EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5B658E71A097B5F0004F9EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				B534031A1A13F236007D848B /* RainchasersAPI.swift */,
 				B507F5771A0C0CE900ABB751 /* RiverTableViewController.swift */,
 				B5B658ED1A097B5F0004F9EE /* Main.storyboard */,
+				B5B38C911A1FA1650060FD9C /* RiverUITableViewCell.swift */,
 				B533EB9D1A0ABFBA00C7FFD2 /* RiverDetailViewController.swift */,
 				B5B658F01A097B5F0004F9EE /* Images.xcassets */,
 				B5B658F21A097B5F0004F9EE /* LaunchScreen.xib */,
@@ -442,6 +445,7 @@
 				B5B658E81A097B5F0004F9EE /* AppDelegate.swift in Sources */,
 				B534031B1A13F236007D848B /* RainchasersAPI.swift in Sources */,
 				B5B658EA1A097B5F0004F9EE /* FirstViewController.swift in Sources */,
+				B5B38C921A1FA1650060FD9C /* RiverUITableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

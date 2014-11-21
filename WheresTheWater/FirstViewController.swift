@@ -19,7 +19,7 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+               
         // Get App Delegate
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let managedContext = appDelegate.managedObjectContext!
@@ -73,6 +73,9 @@ class FirstViewController: UIViewController {
                             println("Refresh Started")
                             // Do Update
                             RainchasersAPI.downloadUpdateRiverData(updateLink)
+                        } else {
+                            //Debug Output
+                            println("No refresh needed")
                         }
                     } else {
                         // No prevous refresh so best do one now!

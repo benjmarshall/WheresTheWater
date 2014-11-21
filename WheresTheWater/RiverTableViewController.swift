@@ -81,7 +81,7 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as RiverUITableViewCell
         
         var river: NSManagedObject
         
@@ -95,34 +95,49 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         // Cell text to be river name
         cell.textLabel.text = river.valueForKey("river") as String?
         // Subtext to be grade
-        var stateText = river.valueForKey("state_text") as String?
+        var stateText = river.valueForKey("state_text") as String!
         if stateText == nil {
             stateText = "No Level Data"
         }
-        cell.detailTextLabel?.text = stateText
+        let gradeText = river.valueForKey("grade_text") as String
+        cell.detailTextLabel?.text = "Grade \(gradeText) - \(stateText)"
+        // Set background colour
+        //cell.backgroundColor == UIColor.greenColor()
+        //cell.contentView.backgroundColor = UIColor.greenColor()
+        cell.stateLabel.text = stateText
 
         return cell
     }
     
-    func filterContentForSearchText(searchText: String) {
+    func filterContentForSearchText(searchText: String, scope: String) {
         // Filter the array using the filter method
         self.filteredRivers = self.rivers.filter({( river: NSManagedObject) -> Bool in
             //let categoryMatch = (scope == "All") || (river.valueForKey("river") == scope)
-            let stringMatch = (river.valueForKey("river") as String).rangeOfString(searchText)
+            if scope == "Title" {
+                let titleMatch = (river.valueForKey("river") as String).rangeOfString(searchText)
+                return titleMatch != nil
+            } else {
+                let gradeMatch = (river.valueForKey("grade_text") as String).rangeOfString(searchText)
+                return gradeMatch != nil
+            }
             //return categoryMatch && (stringMatch != nil)
-            return stringMatch != nil
+            
         })
     }
     
     func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
-        self.filterContentForSearchText(searchString)
+        let scopes = self.searchDisplayController?.searchBar.scopeButtonTitles as [String]
+        let scopeIndex = self.searchDisplayController?.searchBar.selectedScopeButtonIndex as Int!
+        let selectedScope = scopes[scopeIndex] as String
+        self.filterContentForSearchText(searchString, scope: selectedScope)
         return true
     }
     
-    /*func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
-        self.filterContentForSearchText(self.searchDisplayController!.searchBar.text)
+    func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
+        let scope = self.searchDisplayController?.searchBar.scopeButtonTitles as [String]
+        self.filterContentForSearchText(self.searchDisplayController!.searchBar.text, scope: scope[searchOption])
         return true
-    }*/
+    }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         // Remove filtered list when exiting the search view to fix crash in segue
