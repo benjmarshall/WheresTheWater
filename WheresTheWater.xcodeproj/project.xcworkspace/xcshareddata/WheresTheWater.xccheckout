@@ -24,13 +24,13 @@
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>67620B5EFA902936DF04070AF595B76AB0333747</key>
-		<string>../..Alamofire/</string>
+		<string>../..Alamofire</string>
 		<key>79EA0C4F360E98830418AFAE1A03A39D646B0106</key>
-		<string>../..Alamofire-SwiftyJSON/</string>
+		<string>../..Alamofire-SwiftyJSON</string>
 		<key>7AFE51D06F28F68F0362F1F341C49C0C959C4B3C</key>
 		<string>../..</string>
 		<key>C861FC00CEE0F6A6BE81FCFF6785FAA78C58EBB3</key>
-		<string>../..SwiftyJSON/</string>
+		<string>../..SwiftyJSON</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>github.com:benjmarshall/WheresTheWater.git</string>
@@ -44,9 +44,17 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7AFE51D06F28F68F0362F1F341C49C0C959C4B3C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>WheresTheWater</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>67620B5EFA902936DF04070AF595B76AB0333747</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Alamofire</string>
+			<string>WheresTheWaterAlamofire</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
@@ -54,7 +62,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>79EA0C4F360E98830418AFAE1A03A39D646B0106</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Alamofire-SwiftyJSON</string>
+			<string>WheresTheWaterAlamofire-SwiftyJSON</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
@@ -62,15 +70,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>C861FC00CEE0F6A6BE81FCFF6785FAA78C58EBB3</string>
 			<key>IDESourceControlWCCName</key>
-			<string>SwiftyJSON</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>7AFE51D06F28F68F0362F1F341C49C0C959C4B3C</string>
-			<key>IDESourceControlWCCName</key>
-			<string>WheresTheWater</string>
+			<string>WheresTheWaterSwiftyJSON</string>
 		</dict>
 	</array>
 </dict>

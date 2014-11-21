@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		B507F5781A0C0CE900ABB751 /* RiverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507F5771A0C0CE900ABB751 /* RiverTableViewController.swift */; };
-		B5289A5F1A12B7D900848E9F /* Alamofire.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = B5289A591A12B75300848E9F /* Alamofire.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		B5289A711A12B8B900848E9F /* SwiftyJSON.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = B5289A681A12B89600848E9F /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		B5289A7F1A12B93900848E9F /* AlamofireSwiftyJSON.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = B5289A7A1A12B91500848E9F /* AlamofireSwiftyJSON.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B5289A5F1A12B7D900848E9F /* Alamofire.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = B5289A591A12B75300848E9F /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B5289A711A12B8B900848E9F /* SwiftyJSON.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = B5289A681A12B89600848E9F /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B5289A7F1A12B93900848E9F /* AlamofireSwiftyJSON.framework in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = B5289A7A1A12B91500848E9F /* AlamofireSwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B533EB9E1A0ABFBA00C7FFD2 /* RiverDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B533EB9D1A0ABFBA00C7FFD2 /* RiverDetailViewController.swift */; };
 		B534031B1A13F236007D848B /* RainchasersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534031A1A13F236007D848B /* RainchasersAPI.swift */; };
+		B5B38C901A1F8EF40060FD9C /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5B38C8F1A1F8EF40060FD9C /* Entitlements.plist */; };
 		B5B658E81A097B5F0004F9EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B658E71A097B5F0004F9EE /* AppDelegate.swift */; };
 		B5B658EA1A097B5F0004F9EE /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B658E91A097B5F0004F9EE /* FirstViewController.swift */; };
 		B5B658EF1A097B5F0004F9EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5B658ED1A097B5F0004F9EE /* Main.storyboard */; };
@@ -132,6 +133,7 @@
 		B5289A721A12B91500848E9F /* Alamofire-SwiftyJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Alamofire-SwiftyJSON.xcodeproj"; path = "Alamofire-SwiftyJSON/Alamofire-SwiftyJSON.xcodeproj"; sourceTree = "<group>"; };
 		B533EB9D1A0ABFBA00C7FFD2 /* RiverDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RiverDetailViewController.swift; sourceTree = "<group>"; };
 		B534031A1A13F236007D848B /* RainchasersAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RainchasersAPI.swift; sourceTree = "<group>"; };
+		B5B38C8F1A1F8EF40060FD9C /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		B5B658E21A097B5F0004F9EE /* WheresTheWater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WheresTheWater.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5B658E61A097B5F0004F9EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5B658E71A097B5F0004F9EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 		B5B658D91A097B5F0004F9EE = {
 			isa = PBXGroup;
 			children = (
+				B5B38C8F1A1F8EF40060FD9C /* Entitlements.plist */,
 				B5289A721A12B91500848E9F /* Alamofire-SwiftyJSON.xcodeproj */,
 				B5289A601A12B89600848E9F /* SwiftyJSON.xcodeproj */,
 				B5289A531A12B75300848E9F /* Alamofire.xcodeproj */,
@@ -265,7 +268,6 @@
 				B5B658DE1A097B5F0004F9EE /* Sources */,
 				B5B658DF1A097B5F0004F9EE /* Frameworks */,
 				B5B658E01A097B5F0004F9EE /* Resources */,
-				B5C7195A1A0BEB0400716A42 /* ShellScript */,
 				B5289A5E1A12B7B300848E9F /* Copy Files (1 item) */,
 			);
 			buildRules = (
@@ -413,6 +415,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5B38C901A1F8EF40060FD9C /* Entitlements.plist in Resources */,
 				B5B658EF1A097B5F0004F9EE /* Main.storyboard in Resources */,
 				B5B658F41A097B5F0004F9EE /* LaunchScreen.xib in Resources */,
 				B5B658F11A097B5F0004F9EE /* Images.xcassets in Resources */,
@@ -427,22 +430,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		B5C7195A1A0BEB0400716A42 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\n\n# Modify this to your device's IP address.\nIP=\"192.168.0.5\"\n\nif [ \"$NATIVE_ARCH\" != \"i386\" && \"$NATIVE_ARCH\" != \"x86_64\" ]; then\n# Kill any running instances and remove the app folder.\nssh root@$IP \"killall ${TARGETNAME}; rm -rf /Applications/${WRAPPER_NAME}\"\n# Self sign the build.\nldid -S $BUILT_PRODUCTS_DIR/${WRAPPER_NAME}/$TARGETNAME\n# Copy it over.\nscp -r $BUILT_PRODUCTS_DIR/${WRAPPER_NAME} root@$IP:/Applications/\nssh root@$IP \"su -c uicache mobile\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B5B658DE1A097B5F0004F9EE /* Sources */ = {
@@ -528,6 +515,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
 				COPY_PHASE_STRIP = NO;
@@ -571,6 +559,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
 				COPY_PHASE_STRIP = YES;
