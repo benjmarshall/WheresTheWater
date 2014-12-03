@@ -9,7 +9,10 @@
 import UIKit
 
 class RiverUITableViewCell: UITableViewCell {
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var gradeLabel: UILabel!
     @IBOutlet weak var stateLabel: UILabel!
+
 
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -44,6 +44,7 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    
     }
     
     // Added to fix bug which keeps cell selected when swiping back from detail view
@@ -93,17 +94,25 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         }
         
         // Cell text to be river name
-        cell.textLabel.text = river.valueForKey("river") as String?
+        cell.titleLabel.text = river.valueForKey("river") as String?
         // Subtext to be grade
+        
+        var gradeText = river.valueForKey("grade_text") as String
+        cell.gradeLabel.text = "Grade \(gradeText)"
+
         var stateText = river.valueForKey("state_text") as String!
         if stateText == nil {
             stateText = "No Level Data"
         }
-        let gradeText = river.valueForKey("grade_text") as String
-        cell.detailTextLabel?.text = "Grade \(gradeText) - \(stateText)"
-        // Set background colour
-        //cell.backgroundColor == UIColor.greenColor()
-        //cell.contentView.backgroundColor = UIColor.greenColor()
+        
+        /*
+        let firstLetter = stateText[stateText.startIndex]
+        let firstLetterString = "\(firstLetter)"
+        let firstLetterCapitalised = firstLetterString.uppercaseString
+        let indexOfSecondLetter = advance(stateText.startIndex, 1)
+        let remainingLetters = stateText[indexOfSecondLetter..<stateText.endIndex]
+        let stateTextCapitalised = firstLetterCapitalised + remainingLetters
+        */
         cell.stateLabel.text = stateText
 
         return cell

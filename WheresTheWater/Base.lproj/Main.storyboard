@@ -69,7 +69,7 @@
         <scene sceneID="fkZ-OW-Fwi">
             <objects>
                 <tableViewController id="uh0-9e-1Xz" customClass="RiverTableViewController" customModule="WheresTheWater" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="jM7-JH-7xe">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="jM7-JH-7xe">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -85,35 +85,93 @@
                                 <outlet property="delegate" destination="uh0-9e-1Xz" id="cPu-bp-Ofw"/>
                             </connections>
                         </searchBar>
+                        <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3z7-Zv-fFs">
+                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="ehx-w9-jNE" customClass="RiverUITableViewCell" customModule="WheresTheWater" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="60" id="ehx-w9-jNE" customClass="RiverUITableViewCell" customModule="WheresTheWater" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ehx-w9-jNE" id="mHR-Fi-xDm">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmJ-Fx-X2M">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmJ-Fx-X2M">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                                <rect key="frame" x="350" y="11" width="42" height="21"/>
+                                            <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                                <rect key="frame" x="8" y="8" width="273" height="21"/>
+                                            </variation>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grade" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Bs-K0-BLW">
+                                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                                <rect key="frame" x="8" y="30" width="176" height="21"/>
+                                            </variation>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLB-oo-8xv">
+                                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                                <rect key="frame" x="306" y="30" width="86" height="21"/>
                                             </variation>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="6Bs-K0-BLW" firstAttribute="bottom" secondItem="mHR-Fi-xDm" secondAttribute="bottomMargin" id="5I5-4G-qKM"/>
+                                        <constraint firstItem="6Bs-K0-BLW" firstAttribute="top" secondItem="KmJ-Fx-X2M" secondAttribute="bottom" constant="1" id="Ebc-Df-GgN"/>
+                                        <constraint firstItem="KmJ-Fx-X2M" firstAttribute="leading" secondItem="mHR-Fi-xDm" secondAttribute="leadingMargin" id="etS-5F-5qf"/>
+                                        <constraint firstItem="KmJ-Fx-X2M" firstAttribute="top" secondItem="mHR-Fi-xDm" secondAttribute="topMargin" id="ib0-dP-uN4"/>
+                                        <constraint firstItem="KLB-oo-8xv" firstAttribute="top" secondItem="6Bs-K0-BLW" secondAttribute="top" id="kyg-Mc-tJ8"/>
+                                        <constraint firstItem="6Bs-K0-BLW" firstAttribute="leading" secondItem="mHR-Fi-xDm" secondAttribute="leadingMargin" id="nDu-mj-XWb"/>
+                                        <constraint firstItem="KLB-oo-8xv" firstAttribute="trailing" secondItem="mHR-Fi-xDm" secondAttribute="trailingMargin" id="qOD-Qd-NoH"/>
+                                    </constraints>
                                     <variation key="default">
                                         <mask key="subviews">
                                             <exclude reference="KmJ-Fx-X2M"/>
+                                            <exclude reference="6Bs-K0-BLW"/>
+                                            <exclude reference="KLB-oo-8xv"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <exclude reference="etS-5F-5qf"/>
+                                            <exclude reference="ib0-dP-uN4"/>
+                                            <exclude reference="5I5-4G-qKM"/>
+                                            <exclude reference="Ebc-Df-GgN"/>
+                                            <exclude reference="nDu-mj-XWb"/>
+                                            <exclude reference="kyg-Mc-tJ8"/>
+                                            <exclude reference="qOD-Qd-NoH"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
                                         <mask key="subviews">
                                             <include reference="KmJ-Fx-X2M"/>
+                                            <include reference="6Bs-K0-BLW"/>
+                                            <include reference="KLB-oo-8xv"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <include reference="etS-5F-5qf"/>
+                                            <include reference="ib0-dP-uN4"/>
+                                            <include reference="5I5-4G-qKM"/>
+                                            <include reference="Ebc-Df-GgN"/>
+                                            <include reference="nDu-mj-XWb"/>
+                                            <include reference="kyg-Mc-tJ8"/>
+                                            <include reference="qOD-Qd-NoH"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="stateLabel" destination="KmJ-Fx-X2M" id="ajG-J8-UT5"/>
+                                    <outlet property="gradeLabel" destination="6Bs-K0-BLW" id="E2w-A5-ylM"/>
+                                    <outlet property="stateLabel" destination="KLB-oo-8xv" id="NMs-EX-AL3"/>
+                                    <outlet property="titleLabel" destination="KmJ-Fx-X2M" id="xkF-MV-sgY"/>
                                     <segue destination="cTq-fP-5G8" kind="show" identifier="RiverDetailSegue" id="kIv-lt-a5p"/>
                                 </connections>
                             </tableViewCell>
@@ -139,7 +197,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1746" y="360"/>
+            <point key="canvasLocation" x="1746" y="355.5"/>
         </scene>
         <!--River Detail View Controller-->
         <scene sceneID="XSD-7l-KVG">
@@ -153,9 +211,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSV-qR-bCc">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSV-qR-bCc">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -195,6 +253,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="kSV-qR-bCc" firstAttribute="trailing" secondItem="hkf-xN-BLP" secondAttribute="trailingMargin" id="1dl-HT-cwf"/>
                             <constraint firstItem="acP-ij-odQ" firstAttribute="trailing" secondItem="hkf-xN-BLP" secondAttribute="trailingMargin" id="2bV-Y5-f9T"/>
                             <constraint firstItem="A25-t0-ane" firstAttribute="leading" secondItem="hkf-xN-BLP" secondAttribute="leadingMargin" id="6XC-l8-ZrU"/>
                             <constraint firstItem="kSV-qR-bCc" firstAttribute="top" secondItem="aB3-Uh-A84" secondAttribute="bottom" constant="8" id="9ib-xf-IqU"/>
@@ -214,6 +273,7 @@
                                 <exclude reference="1t0-UM-caZ"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="1dl-HT-cwf"/>
                                 <exclude reference="9ib-xf-IqU"/>
                                 <exclude reference="k5m-US-Hkr"/>
                                 <exclude reference="6XC-l8-ZrU"/>
@@ -234,6 +294,7 @@
                                 <include reference="1t0-UM-caZ"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="1dl-HT-cwf"/>
                                 <include reference="9ib-xf-IqU"/>
                                 <include reference="k5m-US-Hkr"/>
                                 <include reference="6XC-l8-ZrU"/>

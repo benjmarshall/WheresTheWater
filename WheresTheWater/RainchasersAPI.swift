@@ -29,6 +29,17 @@ class RainchasersAPI: NSObject {
 
     }
     
+    class func capitaliseString(inputString: String) -> String {
+        
+        let firstLetter = inputString[inputString.startIndex]
+        let firstLetterString = "\(firstLetter)"
+        let firstLetterCapitalised = firstLetterString.uppercaseString
+        let indexOfSecondLetter = advance(inputString.startIndex, 1)
+        let remainingLetters = inputString[indexOfSecondLetter..<inputString.endIndex]
+        let outputString = firstLetterCapitalised + remainingLetters
+        return outputString
+    }
+    
     class func deleteAllRivers() {
         
         // Debug Output
@@ -110,7 +121,10 @@ class RainchasersAPI: NSObject {
                         river.setValue(subJSON["km"].string, forKey: "km")
                         river.setValue(subJSON["state"]["value"].floatValue, forKey: "state_value")
                         river.setValue(subJSON["state"]["time"].string, forKey: "state_time")
-                        river.setValue(subJSON["state"]["text"].string, forKey: "state_text")
+                        if let stateText = subJSON["state"]["text"].string {
+                            let stateTextCapitalised = self.capitaliseString(stateText)
+                            river.setValue(stateTextCapitalised, forKey: "state_text")
+                        }
                         river.setValue(subJSON["state"]["source"]["type"].string, forKey: "state_source_type")
                         river.setValue(subJSON["state"]["source"]["name"].string, forKey: "state_source_name")
                         river.setValue(subJSON["state"]["source"]["value"].floatValue, forKey: "state_source_value")
@@ -256,7 +270,10 @@ class RainchasersAPI: NSObject {
                             river.setValue(subJSON["km"].string, forKey: "km")
                             river.setValue(subJSON["state"]["value"].floatValue, forKey: "state_value")
                             river.setValue(subJSON["state"]["time"].string, forKey: "state_time")
-                            river.setValue(subJSON["state"]["text"].string, forKey: "state_text")
+                            if let stateText = subJSON["state"]["text"].string {
+                                let stateTextCapitalised = self.capitaliseString(stateText)
+                                river.setValue(stateTextCapitalised, forKey: "state_text")
+                            }
                             river.setValue(subJSON["state"]["source"]["type"].string, forKey: "state_source_type")
                             river.setValue(subJSON["state"]["source"]["name"].string, forKey: "state_source_name")
                             river.setValue(subJSON["state"]["source"]["value"].floatValue, forKey: "state_source_value")
@@ -293,6 +310,15 @@ class RainchasersAPI: NSObject {
                             river.setValue(subJSON["grade"]["text"].string, forKey: "grade_text")
                             river.setValue(subJSON["grade"]["value"].string, forKey: "grade_value")
                             river.setValue(subJSON["km"].string, forKey: "km")
+                            river.setValue(subJSON["state"]["value"].floatValue, forKey: "state_value")
+                            river.setValue(subJSON["state"]["time"].string, forKey: "state_time")
+                            if let stateText = subJSON["state"]["text"].string {
+                                let stateTextCapitalised = self.capitaliseString(stateText)
+                                river.setValue(stateTextCapitalised, forKey: "state_text")
+                            }
+                            river.setValue(subJSON["state"]["source"]["type"].string, forKey: "state_source_type")
+                            river.setValue(subJSON["state"]["source"]["name"].string, forKey: "state_source_name")
+                            river.setValue(subJSON["state"]["source"]["value"].floatValue, forKey: "state_source_value")
                             if subJSON["position"][0] != nil {
                                 for (key2: String, subJSON2: JSON) in subJSON["position"] {
                                     if subJSON2["type"].string == "putin" {
