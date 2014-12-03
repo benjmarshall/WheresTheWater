@@ -86,7 +86,7 @@
                             </connections>
                         </searchBar>
                         <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3z7-Zv-fFs">
-                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                            <rect key="frame" x="0.0" y="687" width="600" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -142,13 +142,13 @@
                                             <exclude reference="KLB-oo-8xv"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="etS-5F-5qf"/>
-                                            <exclude reference="ib0-dP-uN4"/>
                                             <exclude reference="5I5-4G-qKM"/>
                                             <exclude reference="Ebc-Df-GgN"/>
                                             <exclude reference="nDu-mj-XWb"/>
                                             <exclude reference="kyg-Mc-tJ8"/>
                                             <exclude reference="qOD-Qd-NoH"/>
+                                            <exclude reference="etS-5F-5qf"/>
+                                            <exclude reference="ib0-dP-uN4"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
@@ -158,13 +158,13 @@
                                             <include reference="KLB-oo-8xv"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="etS-5F-5qf"/>
-                                            <include reference="ib0-dP-uN4"/>
                                             <include reference="5I5-4G-qKM"/>
                                             <include reference="Ebc-Df-GgN"/>
                                             <include reference="nDu-mj-XWb"/>
                                             <include reference="kyg-Mc-tJ8"/>
                                             <include reference="qOD-Qd-NoH"/>
+                                            <include reference="etS-5F-5qf"/>
+                                            <include reference="ib0-dP-uN4"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -273,17 +273,17 @@
                                 <exclude reference="1t0-UM-caZ"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="1dl-HT-cwf"/>
-                                <exclude reference="9ib-xf-IqU"/>
-                                <exclude reference="k5m-US-Hkr"/>
                                 <exclude reference="6XC-l8-ZrU"/>
                                 <exclude reference="EZ7-Ra-g3O"/>
                                 <exclude reference="mqy-ku-ZX0"/>
+                                <exclude reference="2bV-Y5-f9T"/>
+                                <exclude reference="1dl-HT-cwf"/>
+                                <exclude reference="9ib-xf-IqU"/>
+                                <exclude reference="k5m-US-Hkr"/>
                                 <exclude reference="j9U-te-aoT"/>
                                 <exclude reference="py7-mC-jA9"/>
                                 <exclude reference="uWw-jD-hWE"/>
                                 <exclude reference="w7B-LT-mYM"/>
-                                <exclude reference="2bV-Y5-f9T"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -294,17 +294,17 @@
                                 <include reference="1t0-UM-caZ"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="1dl-HT-cwf"/>
-                                <include reference="9ib-xf-IqU"/>
-                                <include reference="k5m-US-Hkr"/>
                                 <include reference="6XC-l8-ZrU"/>
                                 <include reference="EZ7-Ra-g3O"/>
                                 <include reference="mqy-ku-ZX0"/>
+                                <include reference="2bV-Y5-f9T"/>
+                                <include reference="1dl-HT-cwf"/>
+                                <include reference="9ib-xf-IqU"/>
+                                <include reference="k5m-US-Hkr"/>
                                 <include reference="j9U-te-aoT"/>
                                 <include reference="py7-mC-jA9"/>
                                 <include reference="uWw-jD-hWE"/>
                                 <include reference="w7B-LT-mYM"/>
-                                <include reference="2bV-Y5-f9T"/>
                             </mask>
                         </variation>
                     </view>

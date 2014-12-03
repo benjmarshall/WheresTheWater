@@ -104,15 +104,6 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         if stateText == nil {
             stateText = "No Level Data"
         }
-        
-        /*
-        let firstLetter = stateText[stateText.startIndex]
-        let firstLetterString = "\(firstLetter)"
-        let firstLetterCapitalised = firstLetterString.uppercaseString
-        let indexOfSecondLetter = advance(stateText.startIndex, 1)
-        let remainingLetters = stateText[indexOfSecondLetter..<stateText.endIndex]
-        let stateTextCapitalised = firstLetterCapitalised + remainingLetters
-        */
         cell.stateLabel.text = stateText
 
         return cell
@@ -121,15 +112,24 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
     func filterContentForSearchText(searchText: String, scope: String) {
         // Filter the array using the filter method
         self.filteredRivers = self.rivers.filter({( river: NSManagedObject) -> Bool in
-            //let categoryMatch = (scope == "All") || (river.valueForKey("river") == scope)
             if scope == "Title" {
                 let titleMatch = (river.valueForKey("river") as String).rangeOfString(searchText)
                 return titleMatch != nil
             } else {
-                let gradeMatch = (river.valueForKey("grade_text") as String).rangeOfString(searchText)
-                return gradeMatch != nil
+                // Remove spaces from search string in case people type spaces in...
+                let searchTextNoSpaces = searchText.stringByReplacingOccurrencesOfString(" ", withString: "")
+                // Convert to array of search characters
+                let searchArray = Array(searchTextNoSpaces)
+                // Search for each character in the grade string
+                var gradeMatch = 0
+                for searchCharacter in searchArray {
+                    if (river.valueForKey("grade_text") as String).rangeOfString("\(searchCharacter)") != nil {
+                        gradeMatch += 1
+                    }
+                }
+                // Only return true if all characters in search array found
+                return gradeMatch == searchArray.count
             }
-            //return categoryMatch && (stringMatch != nil)
             
         })
     }
@@ -151,6 +151,33 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         // Remove filtered list when exiting the search view to fix crash in segue
         filteredRivers = []
+    }
+    
+    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        
+        // Clear search bar
+        searchBar.text = ""
+        
+        // Change keyboard based on search scope
+        switch selectedScope {
+        case 0:
+            searchBar.keyboardType = UIKeyboardType.Default
+            break;
+        case 1:
+            searchBar.keyboardType = UIKeyboardType.NumbersAndPunctuation
+            break;
+        default:
+            searchBar.keyboardType = UIKeyboardType.Default
+        }
+        
+        // Force reload of keyboard
+        searchBar.resignFirstResponder()
+        searchBar.becomeFirstResponder()
+    }
+    
+    // Force filtered cells to correct height
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 60;
     }
     
 
