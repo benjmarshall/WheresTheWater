@@ -115,7 +115,7 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
             if scope == "Title" {
                 let titleMatch = (river.valueForKey("river") as String).rangeOfString(searchText)
                 return titleMatch != nil
-            } else {
+            } else if scope == "Grade" {
                 // Remove spaces from search string in case people type spaces in...
                 let searchTextNoSpaces = searchText.stringByReplacingOccurrencesOfString(" ", withString: "")
                 // Convert to array of search characters
@@ -129,6 +129,13 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
                 }
                 // Only return true if all characters in search array found
                 return gradeMatch == searchArray.count
+            } else {
+                if let levelText = (river.valueForKey("state_text")as String?) {
+                    let levelMatch = levelText.rangeOfString(searchText)
+                    return levelMatch != nil
+                } else {
+                    return false
+                }
             }
             
         })
@@ -160,9 +167,6 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         
         // Change keyboard based on search scope
         switch selectedScope {
-        case 0:
-            searchBar.keyboardType = UIKeyboardType.Default
-            break;
         case 1:
             searchBar.keyboardType = UIKeyboardType.NumbersAndPunctuation
             break;

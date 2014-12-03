@@ -80,6 +80,7 @@
                             <scopeButtonTitles>
                                 <string>Title</string>
                                 <string>Grade</string>
+                                <string>Level</string>
                             </scopeButtonTitles>
                             <connections>
                                 <outlet property="delegate" destination="uh0-9e-1Xz" id="cPu-bp-Ofw"/>
