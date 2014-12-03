@@ -9,12 +9,16 @@
 import UIKit
 import CoreData
 
-class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
+class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISearchControllerDelegate {
     
     // Our local copy of the Rivers database to be grabbed from CoreData
     var rivers = [NSManagedObject]()
     // An array for filtered rivers
     var filteredRivers = [NSManagedObject]()
+    // An index to tell us which global level filter is currently applied
+    var stateScope = 0
+    // An array of level options
+    let levelOptions = ["Any Level","Low","Medium","High"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,65 +116,90 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
     func filterContentForSearchText(searchText: String, scope: String) {
         // Filter the array using the filter method
         self.filteredRivers = self.rivers.filter({( river: NSManagedObject) -> Bool in
+            
+            // Check global level filter first
+            var levelMatch = false
+            if self.stateScope == 1 {
+                if let levelText = (river.valueForKey("state_text")as String?) {
+                    if levelText.rangeOfString("Low") != nil {
+                        levelMatch = true
+                    }
+                }
+            } else {
+                levelMatch = true
+            }
+
+            
+            // Now do text search
+            var titleMatch = false
+            var gradeMatch = false
             if scope == "Title" {
-                let titleMatch = (river.valueForKey("river") as String).rangeOfString(searchText)
-                return titleMatch != nil
+                if (river.valueForKey("river") as String).rangeOfString(searchText) != nil {
+                    titleMatch = true
+                }
             } else if scope == "Grade" {
                 // Remove spaces from search string in case people type spaces in...
                 let searchTextNoSpaces = searchText.stringByReplacingOccurrencesOfString(" ", withString: "")
                 // Convert to array of search characters
                 let searchArray = Array(searchTextNoSpaces)
                 // Search for each character in the grade string
-                var gradeMatch = 0
+                var gradeNumMatches = 0
                 for searchCharacter in searchArray {
                     if (river.valueForKey("grade_text") as String).rangeOfString("\(searchCharacter)") != nil {
-                        gradeMatch += 1
+                        gradeNumMatches += 1
                     }
                 }
-                // Only return true if all characters in search array found
-                return gradeMatch == searchArray.count
-            } else {
-                if let levelText = (river.valueForKey("state_text")as String?) {
-                    let levelMatch = levelText.rangeOfString(searchText)
-                    return levelMatch != nil
-                } else {
-                    return false
+                if gradeNumMatches == searchArray.count {
+                    gradeMatch = true
                 }
             }
             
+            return (levelMatch & (titleMatch | gradeMatch))
+        
         })
     }
+
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        return true
+    }
     
-    func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
-        let scopes = self.searchDisplayController?.searchBar.scopeButtonTitles as [String]
-        let scopeIndex = self.searchDisplayController?.searchBar.selectedScopeButtonIndex as Int!
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        
+    }
+    
+    func searchBarShouldEndEditing(searchBar: UISearchBar) -> Bool {
+        return false
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        let scopes = searchBar.scopeButtonTitles as [String]
+        let scopeIndex = searchBar.selectedScopeButtonIndex as Int!
         let selectedScope = scopes[scopeIndex] as String
-        self.filterContentForSearchText(searchString, scope: selectedScope)
-        return true
-    }
-    
-    func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
-        let scope = self.searchDisplayController?.searchBar.scopeButtonTitles as [String]
-        self.filterContentForSearchText(self.searchDisplayController!.searchBar.text, scope: scope[searchOption])
-        return true
-    }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        // Remove filtered list when exiting the search view to fix crash in segue
-        filteredRivers = []
+        self.filterContentForSearchText(searchText, scope: selectedScope)
     }
     
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         
-        // Clear search bar
-        searchBar.text = ""
         
-        // Change keyboard based on search scope
         switch selectedScope {
+        case 0 :
+            searchBar.text = ""
+            searchBar.keyboardType = UIKeyboardType.Default
         case 1:
+            searchBar.text = ""
             searchBar.keyboardType = UIKeyboardType.NumbersAndPunctuation
             break;
+        case 2:
+            // Add global level filter
+            if self.stateScope < 3 {
+                self.stateScope += 1
+            } else {
+                self.stateScope = 0
+            }
+            searchBar.scopeButtonTitles = ["Title","Grade",self.levelOptions[self.stateScope]]
+            break;
         default:
+            searchBar.text = ""
             searchBar.keyboardType = UIKeyboardType.Default
         }
         
@@ -178,6 +207,13 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         searchBar.resignFirstResponder()
         searchBar.becomeFirstResponder()
     }
+
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        // Remove filtered list when exiting the search view to fix crash in segue
+        filteredRivers = []
+    }
+    
     
     // Force filtered cells to correct height
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
