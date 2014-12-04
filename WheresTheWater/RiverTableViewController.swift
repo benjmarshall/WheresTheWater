@@ -19,7 +19,9 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
     var stateScope = 0
     // An array of level options
     let levelOptions = ["Any Level","Low","Medium","High"]
-
+    // Level filter Button Label
+    @IBOutlet weak var levelButtonLabel: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,6 +43,12 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
             //Debug Output
             println("Error: failed to fetch Rivers Core Data")
         }
+        
+        if filteredRivers == [] {
+            filteredRivers = rivers
+        }
+        // Debug
+        println(filteredRivers.count)
 
 
         // Uncomment the following line to preserve selection between presentations
@@ -75,13 +83,13 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
         // How many rivers?
-        if tableView == self.searchDisplayController!.searchResultsTableView {
+        //if tableView == self.searchDisplayController!.searchResultsTableView {
             // Filtered List
             return filteredRivers.count
-        } else {
+        //} else {
             // Full List
-            return rivers.count
-        }
+        //    return rivers.count
+        //}
     }
 
     
@@ -91,11 +99,11 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         var river: NSManagedObject
         
         // Check to to see if we are filtering
-        if tableView == self.searchDisplayController!.searchResultsTableView {
+        //if tableView == self.searchDisplayController!.searchResultsTableView {
             river = filteredRivers[indexPath.row]
-        } else {
-           river = rivers[indexPath.row]
-        }
+        //} else {
+        //   river = rivers[indexPath.row]
+       // }
         
         // Cell text to be river name
         cell.titleLabel.text = river.valueForKey("river") as String?
@@ -152,6 +160,9 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
                 if gradeNumMatches == searchArray.count {
                     gradeMatch = true
                 }
+            } else {
+                titleMatch = true
+                gradeMatch = true
             }
             
             return (levelMatch & (titleMatch | gradeMatch))
@@ -179,8 +190,7 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
     }
     
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        
-        
+
         switch selectedScope {
         case 0 :
             searchBar.text = ""
@@ -188,15 +198,6 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         case 1:
             searchBar.text = ""
             searchBar.keyboardType = UIKeyboardType.NumbersAndPunctuation
-            break;
-        case 2:
-            // Add global level filter
-            if self.stateScope < 3 {
-                self.stateScope += 1
-            } else {
-                self.stateScope = 0
-            }
-            searchBar.scopeButtonTitles = ["Title","Grade",self.levelOptions[self.stateScope]]
             break;
         default:
             searchBar.text = ""
@@ -211,13 +212,36 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         // Remove filtered list when exiting the search view to fix crash in segue
-        filteredRivers = []
+        filteredRivers = rivers
+        let selectedScope = ""
+        let searchText = ""
+        filterContentForSearchText(searchText, scope: selectedScope)
+        self.tableView.reloadData()
+        // Debug
+        println(filteredRivers.count)
     }
     
     
     // Force filtered cells to correct height
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 60;
+    }
+    
+    @IBAction func levelButton(sender: AnyObject) {
+        // Add global level filter
+        if stateScope < 3 {
+            stateScope += 1
+        } else {
+            stateScope = 0
+        }
+        levelButtonLabel.title = levelOptions[stateScope]
+        
+        let selectedScope = ""
+        let searchText = ""
+        filterContentForSearchText(searchText, scope: selectedScope)
+        self.tableView.reloadData()
+        // Debug
+        println(filteredRivers.count)
     }
     
 
@@ -267,12 +291,12 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
             var destViewController = segue.destinationViewController as RiverDetailViewController
             var sourceViewController = segue.sourceViewController as RiverTableViewController
             var indexPath: Int
-            if self.filteredRivers.count > 0 {
-                indexPath = self.searchDisplayController!.searchResultsTableView.indexPathForSelectedRow()!.row
+            if let sourceTableView = sourceViewController.tableView.indexPathForSelectedRow()?.row {
+                indexPath = sourceViewController.tableView.indexPathForSelectedRow()!.row
                 destViewController.river = self.filteredRivers[indexPath]
             } else {
-                indexPath = sourceViewController.tableView.indexPathForSelectedRow()!.row
-                destViewController.river = self.rivers[indexPath]
+                indexPath = self.searchDisplayController!.searchResultsTableView.indexPathForSelectedRow()!.row
+                destViewController.river = self.filteredRivers[indexPath]
             }
         }
     }

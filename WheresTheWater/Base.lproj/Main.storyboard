@@ -80,19 +80,11 @@
                             <scopeButtonTitles>
                                 <string>Title</string>
                                 <string>Grade</string>
-                                <string>Any Level</string>
                             </scopeButtonTitles>
                             <connections>
                                 <outlet property="delegate" destination="uh0-9e-1Xz" id="cPu-bp-Ofw"/>
                             </connections>
                         </searchBar>
-                        <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3z7-Zv-fFs">
-                            <rect key="frame" x="0.0" y="687" width="600" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="60" id="ehx-w9-jNE" customClass="RiverUITableViewCell" customModule="WheresTheWater" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -182,8 +174,17 @@
                             <outlet property="delegate" destination="uh0-9e-1Xz" id="f4o-h2-52U"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Rivers" id="wDH-jI-4UZ"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Rivers" id="wDH-jI-4UZ">
+                        <barButtonItem key="rightBarButtonItem" title="Any Level" id="Qls-oo-QNb">
+                            <connections>
+                                <action selector="levelButton:" destination="uh0-9e-1Xz" id="Ari-CD-j6b"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="levelButtonLabel" destination="Qls-oo-QNb" id="gKf-eY-Pca"/>
                         <outlet property="searchDisplayController" destination="PJo-Ww-lQC" id="fa0-kg-EsC"/>
                     </connections>
                 </tableViewController>
