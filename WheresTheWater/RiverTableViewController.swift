@@ -81,15 +81,8 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Return the number of rows in the section.
-        // How many rivers?
-        //if tableView == self.searchDisplayController!.searchResultsTableView {
-            // Filtered List
-            return filteredRivers.count
-        //} else {
-            // Full List
-        //    return rivers.count
-        //}
+        return filteredRivers.count
+
     }
 
     
@@ -98,13 +91,8 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         
         var river: NSManagedObject
         
-        // Check to to see if we are filtering
-        //if tableView == self.searchDisplayController!.searchResultsTableView {
-            river = filteredRivers[indexPath.row]
-        //} else {
-        //   river = rivers[indexPath.row]
-       // }
-        
+        river = filteredRivers[indexPath.row]
+
         // Cell text to be river name
         cell.titleLabel.text = river.valueForKey("river") as String?
         // Subtext to be grade
