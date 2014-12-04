@@ -168,7 +168,7 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
     }
     
     func searchBarShouldEndEditing(searchBar: UISearchBar) -> Bool {
-        return false
+        return true
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
