@@ -16,9 +16,9 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
     // An array for filtered rivers
     var filteredRivers = [NSManagedObject]()
     // An index to tell us which global level filter is currently applied
-    var stateScope = 0
+    var stateScope = 1
     // An array of level options
-    let levelOptions = ["Any Level","Low","Medium","High"]
+    let levelOptions = ["Any Level","Not Empty","Scrape","Low","Medium","High","Very High","Huge"]
     // Level filter Button Label
     @IBOutlet weak var levelButtonLabel: UIBarButtonItem!
     
@@ -56,6 +56,12 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        // Do an initial search to start with "not empty" list
+        let selectedScope = ""
+        let searchText = ""
+        filterContentForSearchText(searchText, scope: selectedScope)
+        self.tableView.reloadData()
     
     }
     
@@ -115,16 +121,60 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
             
             // Check global level filter first
             var levelMatch = false
-            if self.stateScope == 1 {
+            
+            switch self.stateScope {
+            case 0:
+                levelMatch = true
+            case 1:
+                if let levelText = (river.valueForKey("state_text")as String?) {
+                    if levelText.rangeOfString("Empty") != nil {
+                        levelMatch = false
+                    } else if levelText.rangeOfString("No Level Data") != nil {
+                        levelMatch = false
+                    } else {
+                        levelMatch = true
+                    }
+                }
+            case 2:
+                if let levelText = (river.valueForKey("state_text")as String?) {
+                    if levelText.rangeOfString("Scrape") != nil {
+                        levelMatch = true
+                    }
+                }
+            case 3:
                 if let levelText = (river.valueForKey("state_text")as String?) {
                     if levelText.rangeOfString("Low") != nil {
                         levelMatch = true
                     }
                 }
-            } else {
+            case 4:
+                if let levelText = (river.valueForKey("state_text")as String?) {
+                    if levelText.rangeOfString("Medium") != nil {
+                        levelMatch = true
+                    }
+                }
+            case 5:
+                if let levelText = (river.valueForKey("state_text")as String?) {
+                    if levelText.rangeOfString("High") != nil {
+                        levelMatch = true
+                    }
+                }
+            case 6:
+                if let levelText = (river.valueForKey("state_text")as String?) {
+                    if levelText.rangeOfString("Very High") != nil {
+                        levelMatch = true
+                    }
+                }
+            case 7:
+                if let levelText = (river.valueForKey("state_text")as String?) {
+                    if levelText.rangeOfString("Huge") != nil {
+                        levelMatch = true
+                    }
+                }
+            default:
                 levelMatch = true
+                
             }
-
             
             // Now do text search
             var titleMatch = false
@@ -186,7 +236,6 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         case 1:
             searchBar.text = ""
             searchBar.keyboardType = UIKeyboardType.NumbersAndPunctuation
-            break;
         default:
             searchBar.text = ""
             searchBar.keyboardType = UIKeyboardType.Default
@@ -217,7 +266,7 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
     
     @IBAction func levelButton(sender: AnyObject) {
         // Add global level filter
-        if stateScope < 3 {
+        if stateScope < 7 {
             stateScope += 1
         } else {
             stateScope = 0
