@@ -31,8 +31,6 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         
         // Set up Core Data Fetch Request
         let fetchRequest = NSFetchRequest(entityName: "River")
-        //let fetchPredicate = NSPredicate(format: "river contains %s", "Dee")
-        //fetchRequest.predicate = fetchPredicate
         
         // Fetch Core Data
         var error: NSError?
@@ -47,9 +45,6 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         if filteredRivers == [] {
             filteredRivers = rivers
         }
-        // Debug
-        println(filteredRivers.count)
-
 
         // Uncomment the following line to preserve selection between presentations
          self.clearsSelectionOnViewWillAppear = false
@@ -91,7 +86,6 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
 
     }
 
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as RiverUITableViewCell
         
@@ -113,6 +107,12 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         cell.stateLabel.text = stateText
 
         return cell
+    }
+    
+    func alphabetical(r1: NSManagedObject, r2:NSManagedObject) -> Bool {
+        let r1Name = r1.valueForKey("river") as String
+        let r2Name = r2.valueForKey("river") as String
+        return r1Name < r2Name
     }
     
     func filterContentForSearchText(searchText: String, scope: String) {
@@ -206,6 +206,7 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
             return (levelMatch & (titleMatch | gradeMatch))
         
         })
+        self.filteredRivers.sort(alphabetical)
     }
 
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
@@ -254,8 +255,6 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         let searchText = ""
         filterContentForSearchText(searchText, scope: selectedScope)
         self.tableView.reloadData()
-        // Debug
-        println(filteredRivers.count)
     }
     
     
@@ -277,8 +276,6 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         let searchText = ""
         filterContentForSearchText(searchText, scope: selectedScope)
         self.tableView.reloadData()
-        // Debug
-        println(filteredRivers.count)
     }
     
 
