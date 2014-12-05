@@ -57,7 +57,9 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         let searchText = ""
         filterContentForSearchText(searchText, scope: selectedScope)
         self.tableView.reloadData()
-    
+        
+        // Make sure we start with the correct grade filter label
+        levelButtonLabel.title = levelOptions[stateScope]    
     }
     
     // Added to fix bug which keeps cell selected when swiping back from detail view
@@ -101,18 +103,49 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         cell.gradeLabel.text = "Grade \(gradeText)"
 
         var stateText = river.valueForKey("state_text") as String!
-        if stateText == nil {
-            stateText = "No Level Data"
-        }
         cell.stateLabel.text = stateText
 
         return cell
     }
     
-    func alphabetical(r1: NSManagedObject, r2:NSManagedObject) -> Bool {
+    func alphabeticalSort(r1: NSManagedObject, r2:NSManagedObject) -> Bool {
         let r1Name = r1.valueForKey("river") as String
         let r2Name = r2.valueForKey("river") as String
         return r1Name < r2Name
+    }
+    
+    func levelSort(r1: NSManagedObject, r2:NSManagedObject) -> Bool {
+        let r1Level = r1.valueForKey("state_text") as String
+        let r2Level = r2.valueForKey("state_text") as String
+        
+        let r1LevelInt = levelIntConvert(r1Level)
+        let r2LevelInt = levelIntConvert(r2Level)
+        return r1LevelInt < r2LevelInt
+    }
+    
+    func levelIntConvert(level: NSString) -> Int {
+        var levelInt: Int
+        switch level {
+            case "No Level Data":
+                levelInt = 0
+            case "Empty":
+                levelInt = 1
+            case "Scrape":
+                levelInt = 2
+            case "Low":
+                levelInt = 3
+            case "Medium":
+                levelInt = 4
+            case "High":
+                levelInt = 5
+            case "Very High":
+                levelInt = 6
+            case "Huge":
+                levelInt = 7
+            default:
+                levelInt = 8
+        }
+        return levelInt
     }
     
     func filterContentForSearchText(searchText: String, scope: String) {
@@ -206,7 +239,8 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
             return (levelMatch & (titleMatch | gradeMatch))
         
         })
-        self.filteredRivers.sort(alphabetical)
+        //self.filteredRivers.sort(alphabeticalSort)
+        self.filteredRivers.sort(levelSort)
     }
 
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
