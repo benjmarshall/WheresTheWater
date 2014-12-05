@@ -27,11 +27,7 @@ class RiverDetailViewController: UIViewController {
         riverSectionLabel.text = river.valueForKey("section") as String?
         riverDescriptionTextView.text = river.valueForKey("desc") as String?
         riverGradeLabel.text = "Grade " + (river.valueForKey("grade_text") as String!)
-        if river.valueForKey("state_text") == nil {
-            riverLevelLabel.text = "No Level Data"
-        } else {
-            riverLevelLabel.text = river.valueForKey("state_text") as String?
-        }
+        riverLevelLabel.text = river.valueForKey("state_text") as String?
     }
 
     override func didReceiveMemoryWarning() {
