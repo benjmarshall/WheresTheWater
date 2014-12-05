@@ -97,7 +97,7 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
-                                                <rect key="frame" x="8" y="8" width="273" height="21"/>
+                                                <rect key="frame" x="18" y="8" width="273" height="21"/>
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grade" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Bs-K0-BLW">
@@ -106,7 +106,7 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
-                                                <rect key="frame" x="8" y="30" width="176" height="21"/>
+                                                <rect key="frame" x="18" y="30" width="176" height="21"/>
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLB-oo-8xv">
@@ -115,18 +115,18 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
-                                                <rect key="frame" x="306" y="30" width="86" height="21"/>
+                                                <rect key="frame" x="296" y="30" width="86" height="21"/>
                                             </variation>
                                         </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="6Bs-K0-BLW" firstAttribute="bottom" secondItem="mHR-Fi-xDm" secondAttribute="bottomMargin" id="5I5-4G-qKM"/>
                                         <constraint firstItem="6Bs-K0-BLW" firstAttribute="top" secondItem="KmJ-Fx-X2M" secondAttribute="bottom" constant="1" id="Ebc-Df-GgN"/>
-                                        <constraint firstItem="KmJ-Fx-X2M" firstAttribute="leading" secondItem="mHR-Fi-xDm" secondAttribute="leadingMargin" id="etS-5F-5qf"/>
+                                        <constraint firstItem="KmJ-Fx-X2M" firstAttribute="leading" secondItem="mHR-Fi-xDm" secondAttribute="leadingMargin" constant="10" id="etS-5F-5qf"/>
                                         <constraint firstItem="KmJ-Fx-X2M" firstAttribute="top" secondItem="mHR-Fi-xDm" secondAttribute="topMargin" id="ib0-dP-uN4"/>
                                         <constraint firstItem="KLB-oo-8xv" firstAttribute="top" secondItem="6Bs-K0-BLW" secondAttribute="top" id="kyg-Mc-tJ8"/>
-                                        <constraint firstItem="6Bs-K0-BLW" firstAttribute="leading" secondItem="mHR-Fi-xDm" secondAttribute="leadingMargin" id="nDu-mj-XWb"/>
-                                        <constraint firstItem="KLB-oo-8xv" firstAttribute="trailing" secondItem="mHR-Fi-xDm" secondAttribute="trailingMargin" id="qOD-Qd-NoH"/>
+                                        <constraint firstItem="6Bs-K0-BLW" firstAttribute="leading" secondItem="mHR-Fi-xDm" secondAttribute="leadingMargin" constant="10" id="nDu-mj-XWb"/>
+                                        <constraint firstItem="KLB-oo-8xv" firstAttribute="trailing" secondItem="mHR-Fi-xDm" secondAttribute="trailingMargin" constant="-10" id="qOD-Qd-NoH"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="subviews">
@@ -176,7 +176,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Rivers" id="wDH-jI-4UZ">
-                        <barButtonItem key="rightBarButtonItem" title="Any Level" id="Qls-oo-QNb">
+                        <barButtonItem key="rightBarButtonItem" title="Not Empty" id="Qls-oo-QNb">
                             <connections>
                                 <action selector="levelButton:" destination="uh0-9e-1Xz" id="Ari-CD-j6b"/>
                             </connections>
