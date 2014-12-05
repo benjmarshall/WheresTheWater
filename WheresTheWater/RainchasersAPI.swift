@@ -124,6 +124,8 @@ class RainchasersAPI: NSObject {
                         if let stateText = subJSON["state"]["text"].string {
                             let stateTextCapitalised = self.capitaliseString(stateText)
                             river.setValue(stateTextCapitalised, forKey: "state_text")
+                        } else {
+                            river.setValue("No Level Data", forKey: "state_text")
                         }
                         river.setValue(subJSON["state"]["source"]["type"].string, forKey: "state_source_type")
                         river.setValue(subJSON["state"]["source"]["name"].string, forKey: "state_source_name")
@@ -230,8 +232,6 @@ class RainchasersAPI: NSObject {
                 
                 // If we get a valid repsonse the process the received data
                 let status = json["status"]
-                // Debug
-                println(status)
                 if status == 200 {
                     let data = json["data"]
                     
@@ -240,9 +240,12 @@ class RainchasersAPI: NSObject {
                         
                         // Set up Core Data Fetch Request
                         let fetchRequest = NSFetchRequest(entityName: "River")
+                        // Debug
+                        println("Found river")
                         let uuid = subJSON["uuid"].stringValue as String
+                        // Debug
                         println(uuid)
-                        let fetchPredicate = NSPredicate(format: "uuid = %s", uuid)
+                        let fetchPredicate = NSPredicate(format: "uuid = %@", uuid)
                         fetchRequest.predicate = fetchPredicate
                         
                         // Fetch Core Data
@@ -250,6 +253,8 @@ class RainchasersAPI: NSObject {
                         let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as [NSManagedObject]?
                         var rivers = [NSManagedObject]()
                         rivers = fetchedResults!
+                        // Debug
+                        println(rivers.count)
                         
                         if rivers.count > 0 {
                             
@@ -257,7 +262,9 @@ class RainchasersAPI: NSObject {
                             println("Updating River")
                             
                             let river = rivers[0]
-
+                            
+                            // Debug
+                            println(subJSON["uuid"].string)
                             river.setValue(subJSON["uuid"].string, forKey: "uuid")
                             river.setValue(subJSON["url"].string, forKey: "url")
                             river.setValue(subJSON["river"].string, forKey: "river")
@@ -273,6 +280,8 @@ class RainchasersAPI: NSObject {
                             if let stateText = subJSON["state"]["text"].string {
                                 let stateTextCapitalised = self.capitaliseString(stateText)
                                 river.setValue(stateTextCapitalised, forKey: "state_text")
+                            } else {
+                                    river.setValue("No Level Data", forKey: "state_text")
                             }
                             river.setValue(subJSON["state"]["source"]["type"].string, forKey: "state_source_type")
                             river.setValue(subJSON["state"]["source"]["name"].string, forKey: "state_source_name")
@@ -300,6 +309,7 @@ class RainchasersAPI: NSObject {
                             
                             // Create a new river object
                             let river = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+                            println(subJSON["uuid"].string)
                             river.setValue(subJSON["uuid"].string, forKey: "uuid")
                             river.setValue(subJSON["url"].string, forKey: "url")
                             river.setValue(subJSON["river"].string, forKey: "river")
@@ -315,6 +325,8 @@ class RainchasersAPI: NSObject {
                             if let stateText = subJSON["state"]["text"].string {
                                 let stateTextCapitalised = self.capitaliseString(stateText)
                                 river.setValue(stateTextCapitalised, forKey: "state_text")
+                            } else {
+                                river.setValue("No Level Data", forKey: "state_text")
                             }
                             river.setValue(subJSON["state"]["source"]["type"].string, forKey: "state_source_type")
                             river.setValue(subJSON["state"]["source"]["name"].string, forKey: "state_source_name")
