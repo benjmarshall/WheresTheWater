@@ -22,7 +22,7 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
     // An index to tell us which sort is currently aplied
     var sortType = 0
     // An Array of sort options
-    let sortOptions = ["Alpha","Level"]
+    let sortOptions = ["Alpha","Level","Grade"]
     // Level filter Button Label
     @IBOutlet weak var levelButtonLabel: UIBarButtonItem!
     @IBOutlet weak var sortButtonLabel: UIBarButtonItem!
@@ -166,6 +166,15 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         return levelInt
     }
     
+    func gradeSort(r1: NSManagedObject, r2:NSManagedObject) -> Bool {
+        let r1Grade = r1.valueForKey("grade_value") as Float
+        let r2Grade = r2.valueForKey("grade_value") as Float
+        let r1GradeMax = r1.valueForKey("grade_max") as Float
+        let r2GradeMax = r2.valueForKey("grade_max") as Float
+        // TODO: Complete max grade check!
+        return (r1Grade < r2Grade)
+    }
+    
     func filterContentForSearchText(searchText: String, scope: String) {
         // Filter the array using the filter method
         self.filteredRivers = self.rivers.filter({( river: NSManagedObject) -> Bool in
@@ -264,6 +273,8 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         } else if sortType == 1 {
             self.filteredRivers.sort(levelSort)
             self.filteredRivers.sort(alphabeticalSortWithinLevels)
+        } else if sortType == 2 {
+            self.filteredRivers.sort(gradeSort)
         } else {
             self.filteredRivers.sort(alphabeticalSort)
         }
@@ -340,7 +351,7 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
     
     @IBAction func sortButton(sender: AnyObject) {
         // Update sort
-        if sortType < 1 {
+        if sortType < 2 {
             sortType += 1
         } else {
             sortType = 0

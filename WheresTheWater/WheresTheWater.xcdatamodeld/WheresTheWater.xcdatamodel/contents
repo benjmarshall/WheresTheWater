@@ -8,9 +8,9 @@
     <entity name="River" syncable="YES">
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="directions" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="grade_max" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="grade_max" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
         <attribute name="grade_text" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="grade_value" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="grade_value" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
         <attribute name="km" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="putin_lat" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
         <attribute name="putin_lng" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
