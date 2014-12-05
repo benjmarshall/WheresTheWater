@@ -108,9 +108,22 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         return cell
     }
     
+    func alphabeticalSortWithinLevels(r1: NSManagedObject, r2:NSManagedObject) -> Bool {
+        let r1Name = r1.valueForKey("river") as String
+        let r2Name = r2.valueForKey("river") as String
+        
+        let r1Level = r1.valueForKey("state_text") as String
+        let r2Level = r2.valueForKey("state_text") as String
+        
+        let levelsEqual = (r1Level == r2Level)
+        
+        return ((r1Name < r2Name) & levelsEqual)
+    }
+    
     func alphabeticalSort(r1: NSManagedObject, r2:NSManagedObject) -> Bool {
         let r1Name = r1.valueForKey("river") as String
         let r2Name = r2.valueForKey("river") as String
+        
         return r1Name < r2Name
     }
     
@@ -241,6 +254,7 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         })
         //self.filteredRivers.sort(alphabeticalSort)
         self.filteredRivers.sort(levelSort)
+        self.filteredRivers.sort(alphabeticalSortWithinLevels)
     }
 
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
