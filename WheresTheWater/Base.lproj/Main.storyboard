@@ -176,6 +176,11 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Rivers" id="wDH-jI-4UZ">
+                        <barButtonItem key="leftBarButtonItem" title="Alpha" id="6fI-QZ-pGZ">
+                            <connections>
+                                <action selector="sortButton:" destination="uh0-9e-1Xz" id="jOd-K9-UY4"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Not Empty" id="Qls-oo-QNb">
                             <connections>
                                 <action selector="levelButton:" destination="uh0-9e-1Xz" id="Ari-CD-j6b"/>
@@ -186,6 +191,7 @@
                     <connections>
                         <outlet property="levelButtonLabel" destination="Qls-oo-QNb" id="gKf-eY-Pca"/>
                         <outlet property="searchDisplayController" destination="PJo-Ww-lQC" id="fa0-kg-EsC"/>
+                        <outlet property="sortButtonLabel" destination="6fI-QZ-pGZ" id="qnD-Y7-2VA"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ghE-cQ-1zN" userLabel="First Responder" sceneMemberID="firstResponder"/>

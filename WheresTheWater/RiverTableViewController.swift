@@ -19,8 +19,13 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
     var stateScope = 1
     // An array of level options
     let levelOptions = ["Any Level","Not Empty","Scrape","Low","Medium","High","Very High","Huge"]
+    // An index to tell us which sort is currently aplied
+    var sortType = 0
+    // An Array of sort options
+    let sortOptions = ["Alpha","Level"]
     // Level filter Button Label
     @IBOutlet weak var levelButtonLabel: UIBarButtonItem!
+    @IBOutlet weak var sortButtonLabel: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -252,9 +257,16 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
             return (levelMatch & (titleMatch | gradeMatch))
         
         })
-        //self.filteredRivers.sort(alphabeticalSort)
-        self.filteredRivers.sort(levelSort)
-        self.filteredRivers.sort(alphabeticalSortWithinLevels)
+        
+        // Sort list depending on current sort
+        if sortType == 0 {
+            self.filteredRivers.sort(alphabeticalSort)
+        } else if sortType == 1 {
+            self.filteredRivers.sort(levelSort)
+            self.filteredRivers.sort(alphabeticalSortWithinLevels)
+        } else {
+            self.filteredRivers.sort(alphabeticalSort)
+        }
     }
 
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
@@ -312,20 +324,34 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
     }
     
     @IBAction func levelButton(sender: AnyObject) {
-        // Add global level filter
+        // Update global level filter
         if stateScope < 7 {
             stateScope += 1
         } else {
             stateScope = 0
         }
         levelButtonLabel.title = levelOptions[stateScope]
-        
+
         let selectedScope = ""
         let searchText = ""
         filterContentForSearchText(searchText, scope: selectedScope)
         self.tableView.reloadData()
     }
     
+    @IBAction func sortButton(sender: AnyObject) {
+        // Update sort
+        if sortType < 1 {
+            sortType += 1
+        } else {
+            sortType = 0
+        }
+        sortButtonLabel.title = sortOptions[sortType]
+        
+        let selectedScope = ""
+        let searchText = ""
+        filterContentForSearchText(searchText, scope: selectedScope)
+        self.tableView.reloadData()
+    }
 
     /*
     // Override to support conditional editing of the table view.
