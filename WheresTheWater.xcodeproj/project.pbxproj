@@ -200,12 +200,12 @@
 			isa = PBXGroup;
 			children = (
 				B5B38C8F1A1F8EF40060FD9C /* Entitlements.plist */,
-				B5289A721A12B91500848E9F /* Alamofire-SwiftyJSON.xcodeproj */,
-				B5289A601A12B89600848E9F /* SwiftyJSON.xcodeproj */,
-				B5289A531A12B75300848E9F /* Alamofire.xcodeproj */,
 				B5B658E41A097B5F0004F9EE /* WheresTheWater */,
 				B5B658FC1A097B5F0004F9EE /* WheresTheWaterTests */,
 				B5B658E31A097B5F0004F9EE /* Products */,
+				B5289A531A12B75300848E9F /* Alamofire.xcodeproj */,
+				B5289A601A12B89600848E9F /* SwiftyJSON.xcodeproj */,
+				B5289A721A12B91500848E9F /* Alamofire-SwiftyJSON.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -276,9 +276,9 @@
 			buildRules = (
 			);
 			dependencies = (
-				B5289A7E1A12B93500848E9F /* PBXTargetDependency */,
 				B5289A701A12B8AE00848E9F /* PBXTargetDependency */,
 				B5289A5D1A12B7AC00848E9F /* PBXTargetDependency */,
+				B5289A7E1A12B93500848E9F /* PBXTargetDependency */,
 			);
 			name = WheresTheWater;
 			productName = WheresTheWater;
