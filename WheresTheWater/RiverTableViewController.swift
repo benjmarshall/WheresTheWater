@@ -169,10 +169,30 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
     func gradeSort(r1: NSManagedObject, r2:NSManagedObject) -> Bool {
         let r1Grade = r1.valueForKey("grade_value") as Float
         let r2Grade = r2.valueForKey("grade_value") as Float
-        let r1GradeMax = r1.valueForKey("grade_max") as Float
-        let r2GradeMax = r2.valueForKey("grade_max") as Float
-        // TODO: Complete max grade check!
-        return (r1Grade < r2Grade)
+        var gradeCheck = false
+        var gradeMaxExists = false
+        var gradeMaxCheck = false
+        
+        // Check if the Grade float values are equal
+        if r1Grade == r2Grade {
+            // If so we need to sort by lowest max grade
+            if let r1GradeMax = r1.valueForKey("grade_max") as? Float {
+                if let r2GradeMax = r2.valueForKey("grade_max") as? Float {
+                    // Only need to do the check if both rivers have max grades
+                    gradeMaxExists = true
+                    if r1GradeMax < r2GradeMax {
+                        gradeMaxCheck = true
+                    }
+                }
+            }
+        }
+        
+        // If weve done a max grade comparison return the result, if not return the normal check
+        if gradeMaxExists {
+            return gradeMaxCheck
+        } else {
+            return (r1Grade < r2Grade)
+        }
     }
     
     func filterContentForSearchText(searchText: String, scope: String) {
