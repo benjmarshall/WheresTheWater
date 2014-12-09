@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Ben Marshall. All rights reserved.
 //
 
+// TODO: Push sort options into pop over menu.
+// TODO: Push level filter into pop over menu.
+
 import UIKit
 import CoreData
 
@@ -18,11 +21,11 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
     // An index to tell us which global level filter is currently applied
     var stateScope = 1
     // An array of level options
-    let levelOptions = ["Any Level","Not Empty","Scrape","Low","Medium","High","Very High","Huge"]
+    let levelOptions = ["Any Level","Not Empty","Scrape","Low","Medium","High","Huge"]
     // An index to tell us which sort is currently aplied
     var sortType = 0
     // An Array of sort options
-    let sortOptions = ["Alpha","Level","Grade"]
+    let sortOptions = ["Alpha","Reverse Alpha","Level","Reverse Level","Grade","Reverse Grade"]
     // Level filter Button Label
     @IBOutlet weak var levelButtonLabel: UIBarButtonItem!
     @IBOutlet weak var sortButtonLabel: UIBarButtonItem!
@@ -113,6 +116,25 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         return cell
     }
     
+    
+    func alphabeticalSort(r1: NSManagedObject, r2:NSManagedObject) -> Bool {
+        let r1Name = r1.valueForKey("river") as String
+        let r2Name = r2.valueForKey("river") as String
+        
+        let result = r1Name < r2Name
+        
+        return result
+    }
+    
+    func reverseAlphabeticalSort(r1: NSManagedObject, r2:NSManagedObject) -> Bool {
+        let r1Name = r1.valueForKey("river") as String
+        let r2Name = r2.valueForKey("river") as String
+        
+        let result = r1Name < r2Name
+        
+        return !result
+    }
+    
     func alphabeticalSortWithinLevels(r1: NSManagedObject, r2:NSManagedObject) -> Bool {
         let r1Name = r1.valueForKey("river") as String
         let r2Name = r2.valueForKey("river") as String
@@ -122,14 +144,9 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         
         let levelsEqual = (r1Level == r2Level)
         
-        return ((r1Name < r2Name) & levelsEqual)
-    }
-    
-    func alphabeticalSort(r1: NSManagedObject, r2:NSManagedObject) -> Bool {
-        let r1Name = r1.valueForKey("river") as String
-        let r2Name = r2.valueForKey("river") as String
+        let result = (r1Name < r2Name) & levelsEqual
         
-        return r1Name < r2Name
+        return result
     }
     
     func levelSort(r1: NSManagedObject, r2:NSManagedObject) -> Bool {
@@ -138,7 +155,22 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         
         let r1LevelInt = levelIntConvert(r1Level)
         let r2LevelInt = levelIntConvert(r2Level)
-        return r1LevelInt < r2LevelInt
+        
+        let result = r1LevelInt < r2LevelInt
+        
+        return result
+    }
+    
+    func reverseLevelSort(r1: NSManagedObject, r2:NSManagedObject) -> Bool {
+        let r1Level = r1.valueForKey("state_text") as String
+        let r2Level = r2.valueForKey("state_text") as String
+        
+        let r1LevelInt = levelIntConvert(r1Level)
+        let r2LevelInt = levelIntConvert(r2Level)
+        
+        let result = r1LevelInt < r2LevelInt
+        
+        return !result
     }
     
     func levelIntConvert(level: NSString) -> Int {
@@ -156,44 +188,58 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
                 levelInt = 4
             case "High":
                 levelInt = 5
-            case "Very High":
-                levelInt = 6
             case "Huge":
-                levelInt = 7
+                levelInt = 6
             default:
-                levelInt = 8
+                levelInt = 7
         }
         return levelInt
     }
     
-    func gradeSort(r1: NSManagedObject, r2:NSManagedObject) -> Bool {
-        let r1Grade = r1.valueForKey("grade_value") as Float
-        let r2Grade = r2.valueForKey("grade_value") as Float
-        var gradeCheck = false
-        var gradeMaxExists = false
-        var gradeMaxCheck = false
+    
+    func gradeMaxSort(r1: NSManagedObject, r2:NSManagedObject) -> Bool {
+        var r1Grade = r1.valueForKey("grade_value") as Float
+        var r2Grade = r2.valueForKey("grade_value") as Float
+    
+        var r1GradeMax: Float = 0
+        var r2GradeMax: Float = 0
         
-        // Check if the Grade float values are equal
-        if r1Grade == r2Grade {
-            // If so we need to sort by lowest max grade
-            if let r1GradeMax = r1.valueForKey("grade_max") as? Float {
-                if let r2GradeMax = r2.valueForKey("grade_max") as? Float {
-                    // Only need to do the check if both rivers have max grades
-                    gradeMaxExists = true
-                    if r1GradeMax < r2GradeMax {
-                        gradeMaxCheck = true
-                    }
-                }
-            }
+        if let temp = r1.valueForKey("grade_max") as? Float {
+            r1GradeMax = r1.valueForKey("grade_max") as Float
+            r1Grade += (r1GradeMax/100)
+        }
+        if let temp2 = r2.valueForKey("grade_max") as? Float {
+            r2GradeMax = r2.valueForKey("grade_max") as Float
+            r2Grade += (r2GradeMax/100)
         }
         
-        // If weve done a max grade comparison return the result, if not return the normal check
-        if gradeMaxExists {
-            return gradeMaxCheck
-        } else {
-            return (r1Grade < r2Grade)
-        }
+        let result = r1Grade < r2Grade
+        
+        return result
     }
+    
+    
+    func reverseGradeSort(r1: NSManagedObject, r2:NSManagedObject) -> Bool {
+        var r1Grade = r1.valueForKey("grade_value") as Float
+        var r2Grade = r2.valueForKey("grade_value") as Float
+        
+        var r1GradeMax: Float = 0
+        var r2GradeMax: Float = 0
+        
+        if let temp = r1.valueForKey("grade_max") as? Float {
+            r1GradeMax = r1.valueForKey("grade_max") as Float
+            r1Grade += (r1GradeMax/100)
+        }
+        if let temp2 = r2.valueForKey("grade_max") as? Float {
+            r2GradeMax = r2.valueForKey("grade_max") as Float
+            r2Grade += (r2GradeMax/100)
+        }
+        
+        let result = r1Grade < r2Grade
+        
+        return !result
+    }
+    
     
     func filterContentForSearchText(searchText: String, scope: String) {
         // Filter the array using the filter method
@@ -291,10 +337,18 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         if sortType == 0 {
             self.filteredRivers.sort(alphabeticalSort)
         } else if sortType == 1 {
+            self.filteredRivers.sort(reverseAlphabeticalSort)
+        } else if sortType == 2 {
             self.filteredRivers.sort(levelSort)
             self.filteredRivers.sort(alphabeticalSortWithinLevels)
-        } else if sortType == 2 {
-            self.filteredRivers.sort(gradeSort)
+        } else if sortType == 3 {
+            self.filteredRivers.sort(reverseLevelSort)
+            self.filteredRivers.sort(alphabeticalSortWithinLevels)
+        } else if sortType == 4 {
+            //self.filteredRivers.sort(gradeSort)
+            self.filteredRivers.sort(gradeMaxSort)
+        } else if sortType == 5 {
+            self.filteredRivers.sort(reverseGradeSort)
         } else {
             self.filteredRivers.sort(alphabeticalSort)
         }
@@ -356,7 +410,7 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
     
     @IBAction func levelButton(sender: AnyObject) {
         // Update global level filter
-        if stateScope < 7 {
+        if stateScope < 6 {
             stateScope += 1
         } else {
             stateScope = 0
@@ -371,7 +425,7 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
     
     @IBAction func sortButton(sender: AnyObject) {
         // Update sort
-        if sortType < 2 {
+        if sortType < 5 {
             sortType += 1
         } else {
             sortType = 0
