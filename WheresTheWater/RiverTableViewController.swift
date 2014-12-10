@@ -38,11 +38,11 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         let managedContext = appDelegate.managedObjectContext!
         
         // Set up Core Data Fetch Request
-        let fetchRequest = NSFetchRequest(entityName: "River")
+        var fetchRequest = NSFetchRequest(entityName: "River")
         
         // Fetch Core Data
         var error: NSError?
-        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as [NSManagedObject]?
+        var fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as [NSManagedObject]?
         if let results = fetchedResults {
             rivers = results
         } else {
@@ -67,7 +67,24 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         self.tableView.reloadData()
         
         // Make sure we start with the correct grade filter label
-        levelButtonLabel.title = levelOptions[stateScope]    
+        levelButtonLabel.title = levelOptions[stateScope]
+        
+        // Add observer to core data DB stats so we get notified when the database is updated
+        fetchRequest = NSFetchRequest(entityName: "DB_stats")
+        let dbFetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as [NSManagedObject]?
+        var dbStats: NSManagedObject
+        if let dbResults = dbFetchedResults {
+            if dbResults.count > 0 {
+                dbStats = dbResults[0]
+                //Debug Output
+                println("Adding observer")
+                dbStats.addObserver(self, forKeyPath: "full_update_time", options: nil, context: nil)
+            }
+        } else {
+            //Debug Output
+            println("Error: failed to fetch DB Stats Core Data")
+        }
+
     }
     
     // Added to fix bug which keeps cell selected when swiping back from detail view
@@ -197,7 +214,7 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
     }
     
     
-    func gradeMaxSort(r1: NSManagedObject, r2:NSManagedObject) -> Bool {
+    func gradeSort(r1: NSManagedObject, r2:NSManagedObject) -> Bool {
         var r1Grade = r1.valueForKey("grade_value") as Float
         var r2Grade = r2.valueForKey("grade_value") as Float
     
@@ -345,8 +362,7 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
             self.filteredRivers.sort(reverseLevelSort)
             self.filteredRivers.sort(alphabeticalSortWithinLevels)
         } else if sortType == 4 {
-            //self.filteredRivers.sort(gradeSort)
-            self.filteredRivers.sort(gradeMaxSort)
+            self.filteredRivers.sort(gradeSort)
         } else if sortType == 5 {
             self.filteredRivers.sort(reverseGradeSort)
         } else {
@@ -402,7 +418,6 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         self.tableView.reloadData()
     }
     
-    
     // Force filtered cells to correct height
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 60;
@@ -436,6 +451,17 @@ class RiverTableViewController: UITableViewController, UISearchBarDelegate, UISe
         let searchText = ""
         filterContentForSearchText(searchText, scope: selectedScope)
         self.tableView.reloadData()
+    }
+    
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+        // Debug
+        println("DB Updated, reloading data")
+        self.tableView.reloadData()
+        
+        let alertController = UIAlertController(title: "Default Style", message: "A standard alert.", preferredStyle: .Alert)
+        let OKAction = UIAlertAction(title: "OK", style: .Default, nil)
+        alertController.addAction(OKAction)
+        self.presentViewController(alertController, animated: true, nil)
     }
 
     /*

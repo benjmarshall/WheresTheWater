@@ -46,6 +46,8 @@ class FirstViewController: UIViewController {
             } else {
                 // Fetch latest full update time
                 let fullUpdateTime = db_stats[0].valueForKey("full_update_time") as NSDate
+                // Debug
+                println("Full update time = \(fullUpdateTime)")
                 // Create comparison times (1 week)
                 let compareFullTime = NSDate(timeInterval: -604800, sinceDate: NSDate())
                 let compareFullResult = fullUpdateTime.compare(compareFullTime)
